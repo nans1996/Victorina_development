@@ -14,4 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/registration.unity
     guid: 1664f55b8dce2a64d873c70d89f8931f
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Welcom.unity
+    guid: ed5d6acceba44544cb64162f138c58a8
+  - enabled: 1
+    path: Assets/question.unity
+    guid: 71d83c3990f203f478532aaae63ff7cd
