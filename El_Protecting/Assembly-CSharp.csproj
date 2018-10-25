@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\FadeInOut.cs" />
     <Compile Include="Assets\Scripts\Transition.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>E:/study/Victorina_development/El_Protecting/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
