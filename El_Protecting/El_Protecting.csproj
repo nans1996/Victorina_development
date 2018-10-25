@@ -221,12 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\FadeInOut.cs" />
-    <Compile Include="Assets\Scripts\Notification\AndroidNotification.cs" />
-    <Compile Include="Assets\Scripts\Notification\NotifyController.cs" />
     <Compile Include="Assets\Scripts\Transition.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
