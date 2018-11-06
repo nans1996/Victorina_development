@@ -1,0 +1,30 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<html>
+
+<body>
+<div>
+    <p>Статистика</p>
+    <form method="post">
+        <input type="text" name="date" placeholder="Введите вопрос">
+        <input type="text" name="count_truth" placeholder="Введите вопрос">
+        <input type="text" name="id_user" placeholder="Введите вопрос">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+{{#statistics}}
+    <div>
+        <b>{{id_statistic}}</b>
+        <span>{{date}}</span>
+        <span>{{count_truth}}</span>
+        <span>{{id_user}}</span>
+    </div>
+
+    <form method="post" action="edit">
+        <button type="submit">Найти</button>
+    </form>
+
+{{/statistics}}
+
+</body>
+</html>

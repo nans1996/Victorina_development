@@ -1,0 +1,19 @@
+<html>
+
+<body>
+<div>
+    <p>Вопрос</p>
+    <form method="post">
+        <input type="text" name="description" placeholder="Введите вопрос">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+{{#questions}}
+    <div>
+        <b>{{idQuestion}}</b>
+        <span>{{description}}</span>
+    </div>
+{{/questions}}
+
+</body>
+</html>
