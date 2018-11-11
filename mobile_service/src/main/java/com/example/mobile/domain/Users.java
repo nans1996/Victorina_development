@@ -1,9 +1,7 @@
 package com.example.mobile.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Users {
@@ -17,10 +15,34 @@ public class Users {
     private String first_name;
     private String last_name;
 
+    @ManyToMany
+    @JoinTable(name = "user_question",
+            joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "id_question", referencedColumnName = "idQuestion"))
+    private  Collection<Question> questionCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
+    private Collection<Statistic> staticCollection;
+
     public Users() {
     }
 
 
+    public Collection<Question> getQuestionCollection() {
+        return questionCollection;
+    }
+
+    public void setQuestionCollection(Collection<Question> questionCollection) {
+        this.questionCollection = questionCollection;
+    }
+
+    public Collection<Statistic> getStaticCollection() {
+        return staticCollection;
+    }
+
+    public void setStaticCollection(Collection<Statistic> staticCollection) {
+        this.staticCollection = staticCollection;
+    }
 
     public Integer getId() {
         return id;
