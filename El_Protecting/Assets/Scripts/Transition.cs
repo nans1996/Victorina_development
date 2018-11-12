@@ -15,7 +15,7 @@ public class Transition : MonoBehaviour {
 
     public void TransitionToWelcome()
     { 
-        Application.LoadLevel("Welcom");
+        Application.LoadLevel("welcome");
        
     }
 

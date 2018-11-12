@@ -39,7 +39,12 @@ public class StatisticController {
 
 }
 
-
+//вывести по пользователю
+@RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)
+    public Iterable<Statistic> getByUser(@RequestParam("id_user") Integer id_user) throws ParseException {
+        Iterable<Statistic> st = statisticRepos.findById_user(id_user);
+        return st;
+}
 
 
 }

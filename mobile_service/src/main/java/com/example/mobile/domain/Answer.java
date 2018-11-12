@@ -3,9 +3,10 @@ package com.example.mobile.domain;
 import javax.persistence.*;
 
 //@NamedQueries({
-//        @NamedQuery(name = "Answer.findByIdQuestion", query = "select c from answer c where c.id_queston = :id_question")
+//        @NamedQuery(name = "Answer.findByIdQuestion", query = "select c from answer c where c.id_question = :id_question")
 //})
 @Entity
+@Table(name="answer")
 public class Answer {
 
 @Id

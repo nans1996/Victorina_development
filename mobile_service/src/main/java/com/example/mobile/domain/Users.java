@@ -3,6 +3,7 @@ package com.example.mobile.domain;
 import javax.persistence.*;
 import java.util.Collection;
 
+
 @Entity
 public class Users {
     @Id
