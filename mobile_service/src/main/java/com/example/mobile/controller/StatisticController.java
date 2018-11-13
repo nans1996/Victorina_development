@@ -1,8 +1,8 @@
 package com.example.mobile.controller;
 
-import com.example.mobile.domain.Statistic;
-import com.example.mobile.domain.Users;
+
 import com.example.mobile.repos.StatisticRepos;
+import com.sun.org.glassfish.external.statistics.Statistic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,11 +40,11 @@ public class StatisticController {
 }
 
 //вывести по пользователю
-@RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)
-    public Iterable<Statistic> getByUser(@RequestParam("id_user") Integer id_user) throws ParseException {
-        Iterable<Statistic> st = statisticRepos.findById_user(id_user);
-        return st;
-}
+//@RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)
+//    public Iterable<Statistic> getByUser(@RequestParam("id_user") Integer id_user) throws ParseException {
+//        Iterable<Statistic> st = statisticRepos.findById_user(id_user);
+//        return st;
+//}
 
 
 }

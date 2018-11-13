@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface AnswerRepos extends CrudRepository<Answer, Long> {
 
-    List<Answer> findById_question(Question id_question);
+    //List<Answer> findById_question(Question id_question);
 }
