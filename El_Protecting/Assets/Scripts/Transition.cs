@@ -8,6 +8,11 @@ public class Transition : MonoBehaviour {
     public Image img;
     public AnimationCurve curve;
 
+    public void TransitionToLogIn()
+    {
+        Application.LoadLevel("main");
+    }
+
     public void TransitionToProfile()
     {
         Application.LoadLevel("profile");
@@ -21,9 +26,23 @@ public class Transition : MonoBehaviour {
 
     public void TransitionToQuestion()
     {
-        Application.LoadLevel("question");
+        Application.LoadLevel("question");    
         
-        
+    }
+
+    public void TransitionToMenu()
+    {
+        Application.LoadLevel("menu");
+    }
+
+    public void TransitionToStatictic()
+    {
+        Application.LoadLevel("statictic");
+    }
+
+    public void TransitionToRegistration()
+    {
+        Application.LoadLevel("registration");
     }
 
     IEnumerator FadeIn()
