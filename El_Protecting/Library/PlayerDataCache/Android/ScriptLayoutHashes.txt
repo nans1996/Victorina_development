@@ -1,12 +1,14 @@
 Android
 PlayerPath?
-C:/Users/nasty/Documents/GitHub/Victorina_development/El_Protecting/Build/ap2.apk
+C:/Users/nasty/Documents/GitHub/Victorina_development/El_Protecting/Build/ap4.apk
 SceneListBegin?
 Assets/main.unity
 Assets/profile.unity
 Assets/registration.unity
 Assets/welcome.unity
 Assets/question.unity
+Assets/menu.unity
+Assets/statictic.unity
 SceneListEnd?
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 7b803eb2910e9b4cd5e521ae07b9f7d6 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
