@@ -719,7 +719,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1060238616}
-        m_MethodName: TransitionToStatictic
+        m_MethodName: TransitionToLogIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
