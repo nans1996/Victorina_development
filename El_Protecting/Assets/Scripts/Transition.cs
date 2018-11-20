@@ -8,7 +8,22 @@ public class Transition : MonoBehaviour {
     public Image img;
     public AnimationCurve curve;
 
-    public void TransitionToLogIn()
+    public void OpenPanelDialog(GameObject PanelDialog)
+    {
+        if (PanelDialog != null)
+        {
+            Animator animator = PanelDialog.GetComponent<Animator>();
+            if (animator != null)
+            {
+                bool isOpen = animator.GetBool("open");
+
+                animator.SetBool("open", !isOpen);
+            }
+        }
+    }
+
+
+        public void TransitionToLogIn()
     {
         Application.LoadLevel("main");
     }
