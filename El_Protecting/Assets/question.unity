@@ -147,6 +147,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  ButtonExit: {fileID: 0}
 --- !u!4 &10268564
 Transform:
   m_ObjectHideFlags: 0
@@ -2740,7 +2741,7 @@ MonoBehaviour:
         m_MethodName: OpenPanelDialog
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1168166274}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
