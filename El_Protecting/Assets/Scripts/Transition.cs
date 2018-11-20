@@ -7,10 +7,10 @@ public class Transition : MonoBehaviour {
 
     public Image img;
     public AnimationCurve curve;
-    public Button ButtonExit;
 
     public void OpenPanelDialog(GameObject PanelDialog)
     {
+        
 
         if (PanelDialog != null)
         {
@@ -21,13 +21,13 @@ public class Transition : MonoBehaviour {
             {
                  
                 bool isOpen = animator.GetBool("open");
-                ButtonExit.enabled = false;
                 animator.SetBool("open", !isOpen);
                
             }
 
         }
     }
+    
 
 
     public void TransitionToLogIn()
