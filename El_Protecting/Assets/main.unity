@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 299017362}
   - component: {fileID: 299017361}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonLogIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,6 +885,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  ButtonExit: {fileID: 0}
 --- !u!4 &634521349
 Transform:
   m_ObjectHideFlags: 0
