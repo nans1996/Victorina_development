@@ -14,7 +14,6 @@ public class Users {
     private Integer id;
 
     @NotNull(message = "Заполните логин")
-  //  @Column(name = "login",unique = true)
     private String login;
 
     @NotNull(message = "Заполните пароль")
@@ -26,11 +25,11 @@ public class Users {
     private String email;
 
     @NotNull(message = "Заполните имя")
-    @Size(min=1, message = "Введите имя")
+    @Size(min=1, max = 50, message = "Введите имя")
     private String first_name;
 
     @NotNull(message = "Заполните фамилию")
-    @Size(min = 1, message = "Введите фамилию")
+    @Size(min = 1, max = 50, message = "Введите фамилию")
     private String last_name;
 
     @ManyToMany

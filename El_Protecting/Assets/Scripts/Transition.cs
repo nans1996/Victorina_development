@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Transition : MonoBehaviour {
@@ -64,7 +65,7 @@ public class Transition : MonoBehaviour {
 
     public void TransitionToRegistration()
     {
-        Application.LoadLevel("registration");
+        SceneManager.LoadScene("registration");
     }
 
     IEnumerator FadeIn()

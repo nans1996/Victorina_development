@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface AnswerRepos extends CrudRepository<Answer, Long> {
 
- @Query("select a from Answer a where a.id_question = :id")
- List<Answer> findById_question(@Param("id") Integer id);
+ @Query("select a from Answer a where a.id_question = :id_question")
+ List<Answer> findById_question(@Param("id_question") Question id);
 //      List<Answer> findById_question(Integer id);
 //
 }

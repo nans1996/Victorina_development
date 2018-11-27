@@ -1,6 +1,7 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
@@ -11,6 +12,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idQuestion;
     @Size(max = 65535)
+    @NotNull
     private String description;
 
 

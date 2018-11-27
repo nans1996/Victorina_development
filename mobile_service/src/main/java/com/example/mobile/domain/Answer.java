@@ -1,6 +1,7 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -17,7 +18,9 @@ public class Answer {
     private  Question id_question;
 
     @Size(max = 255)
+    @NotNull
     private  String description;
+    @NotNull
     private  Boolean result;
 
    
