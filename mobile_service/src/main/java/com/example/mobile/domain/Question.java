@@ -1,6 +1,7 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -8,7 +9,8 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idQuestion;
+    private Integer idQuestion;
+    @Size(max = 65535)
     private String description;
 
 
@@ -42,11 +44,11 @@ public class Question {
         this.users = users;
     }
 
-    public int getIdQuestion() {
+    public Integer getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(int idQuestion) {
+    public void setIdQuestion(Integer idQuestion) {
         this.idQuestion = idQuestion;
     }
 

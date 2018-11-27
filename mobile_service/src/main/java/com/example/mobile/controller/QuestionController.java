@@ -3,11 +3,14 @@ package com.example.mobile.controller;
 import com.example.mobile.domain.Question;
 import com.example.mobile.domain.Users;
 import com.example.mobile.repos.QuestionRepos;
+import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/question")
@@ -24,10 +27,16 @@ public class QuestionController {
 
     //добавить???
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@RequestParam("description") String description) throws ParseException {
-        Question q = new Question(description);
+    public Question add(@RequestBody Question question) throws ParseException {
+        Question q = new Question(question.getDescription());
         questionRepos.save(q);
 
-        return "успешно";
+        return q;
+    }
+
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
+    public Optional<Question> findByIdQuestion(@RequestParam ("id") Integer id) throws ParseException {
+Optional<Question> q = questionRepos.findById(id);
+return q;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.Max;
 
 
 @Entity
@@ -10,7 +10,8 @@ public class Statistic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id_statistic;
-    private Date date;
+    private String date;
+    @Max(value = 35)
     private int count_truth;
 
     @JoinColumn(name = "id_user", referencedColumnName = "id")
@@ -20,7 +21,7 @@ public class Statistic {
     public Statistic() {
     }
 
-    public Statistic(Date date, int count_truth, Users id_user) {
+    public Statistic(String date, int count_truth, Users id_user) {
         this.date = date;
         this.count_truth = count_truth;
         this.id_user = id_user;
@@ -36,11 +37,11 @@ public class Statistic {
         this.id_statistic = id_statistic;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

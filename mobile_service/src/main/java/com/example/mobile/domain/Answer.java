@@ -1,6 +1,7 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -14,6 +15,8 @@ public class Answer {
     @JoinColumn(name = "id_question", referencedColumnName = "idQuestion")
     @ManyToOne(optional = false)
     private  Question id_question;
+
+    @Size(max = 255)
     private  String description;
     private  Boolean result;
 
@@ -21,8 +24,7 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(Integer id_answer, Question id_question, String description, Boolean result) {
-        this.id_answer = id_answer;
+    public Answer( Question id_question, String description, Boolean result) {
         this.id_question = id_question;
         this.description = description;
         this.result = result;

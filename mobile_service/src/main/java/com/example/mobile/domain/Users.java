@@ -1,6 +1,9 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 
@@ -10,10 +13,24 @@ public class Users {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
+    @NotNull(message = "Заполните логин")
+  //  @Column(name = "login",unique = true)
     private String login;
+
+    @NotNull(message = "Заполните пароль")
+    @Size(min=6, max=20, message = "Пароль должен содержать от 6 до 20 символов")
     private String password;
+
+    @NotNull(message = "Заполните эл. почту")
+    @Pattern(regexp="^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$", message="Недопустимый адрес электронной почты")
     private String email;
+
+    @NotNull(message = "Заполните имя")
+    @Size(min=1, message = "Введите имя")
     private String first_name;
+
+    @NotNull(message = "Заполните фамилию")
+    @Size(min = 1, message = "Введите фамилию")
     private String last_name;
 
     @ManyToMany
