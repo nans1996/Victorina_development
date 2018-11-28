@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +29,7 @@ public class StatisticController {
 
    //добавление статистики
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<Statistic> addStatistic(@Valid @RequestBody Statistic statistic)  {
+    public ResponseEntity<Statistic> addStatistic(@RequestBody Statistic statistic)  {
         HttpHeaders http = new HttpHeaders();
         try {
             Date date = new Date();
@@ -47,6 +46,13 @@ public class StatisticController {
         return new ResponseEntity<>(statistic, http, HttpStatus.CREATED);
     }
 
+    //вернуть всю статистику надо ли?
+@RequestMapping(value = "get")
+    public Iterable<Statistic> getStatistic() throws ParseException {
+     Iterable<Statistic> st = statisticRepos.findAll();
+     return st;
+
+}
 
 //вывести по пользователю
 @RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)

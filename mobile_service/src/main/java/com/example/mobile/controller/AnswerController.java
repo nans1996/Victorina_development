@@ -23,6 +23,8 @@ public class AnswerController {
     @Autowired
     private AnswerRepos answerRepos;
 
+
+
     //вывод по вопросу
     @RequestMapping(value = "/getByIdQuestion", method = RequestMethod.GET)
  public List<Answer> getByIdQuestion(@RequestParam("id_question") Question id_question){
@@ -30,4 +32,11 @@ public class AnswerController {
      return a;
  }
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Answer addAnswer(@RequestBody Answer answer) {
+
+        Answer st = new Answer(answer.getId_question(), answer.getDescription(), answer.getResult());
+        answerRepos.save(st);
+        return st;
+    }
 }

@@ -45,9 +45,23 @@ public class UserController {
     }
 
 
+//работает
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(@Valid @RequestBody Users user){
+     //   HttpHeaders http = new HttpHeaders();
+        try {
+            userRepos.save(user);
+        }
+        catch (Exception e){
+            LOGGER.error("Ошибка добавления пользователя: "+ e);
+        }
+        return "успешно";
+    }
+
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(@Valid @RequestParam("login") String login, @Valid @RequestParam("password") String password, @Valid @RequestParam("email") String email,
                           @Valid @RequestParam("first_name") String first_name, @Valid @RequestParam("last_name") String last_name){
+        //   HttpHeaders http = new HttpHeaders();
         try {
 
             Users user = new Users(login,password,email,first_name,last_name);
