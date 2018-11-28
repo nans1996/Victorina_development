@@ -1,19 +1,20 @@
 package com.example.mobile.controller;
 
 import com.example.mobile.domain.Answer;
-import com.example.mobile.domain.Question;
-import com.example.mobile.domain.Statistic;
-import com.example.mobile.domain.Users;
 import com.example.mobile.repos.AnswerRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> parent of 97f15ce... сервис
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,7 @@ public class AnswerController {
 
 
     //вывод по вопросу
+<<<<<<< HEAD
     @RequestMapping(value = "/getByIdQuestion", method = RequestMethod.GET)
  public List<Answer> getByIdQuestion(@RequestParam("id_question") Question id_question){
      List<Answer> a = answerRepos.findById_question(id_question);
@@ -39,4 +41,11 @@ public class AnswerController {
         answerRepos.save(st);
         return st;
     }
+=======
+//    @RequestMapping(value = "/getByIdQuestion", method = RequestMethod.POST)
+// public List<Answer> getByIdQuestion(@RequestParam("id_question") Question id_question){
+//     List<Answer> a = answerRepos.findById_question(id_question);
+//     return a;
+// }
+>>>>>>> parent of 97f15ce... сервис
 }
