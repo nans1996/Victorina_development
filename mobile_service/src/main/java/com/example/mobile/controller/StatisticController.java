@@ -40,19 +40,11 @@ public class StatisticController {
 }
 
 //вывести по пользователю
-<<<<<<< HEAD
-@RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)
-    public List<Statistic> getByUser(@RequestParam("id_user") Integer id_user) throws ParseException {
-        List<Statistic> st = statisticRepos.findById_user(id_user);
-        return st;
-}
-=======
 //@RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)
 //    public Iterable<Statistic> getByUser(@RequestParam("id_user") Integer id_user) throws ParseException {
 //        Iterable<Statistic> st = statisticRepos.findById_user(id_user);
 //        return st;
 //}
->>>>>>> parent of 97f15ce... сервис
 
 
 }
