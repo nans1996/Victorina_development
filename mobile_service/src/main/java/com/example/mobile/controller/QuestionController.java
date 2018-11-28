@@ -25,15 +25,7 @@ public class QuestionController {
        return questionRepos.findAll();
     }
 
-    //добавить???
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Question add(@RequestBody Question question) throws ParseException {
-        Question q = new Question(question.getDescription());
-        questionRepos.save(q);
-
-        return q;
-    }
-
+ //???
     @RequestMapping(value = "/findById", method = RequestMethod.GET)
     public Optional<Question> findByIdQuestion(@RequestParam ("id") Integer id) throws ParseException {
 Optional<Question> q = questionRepos.findById(id);
