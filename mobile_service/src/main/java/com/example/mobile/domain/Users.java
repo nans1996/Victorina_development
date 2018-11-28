@@ -10,10 +10,24 @@ public class Users {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
+<<<<<<< HEAD
+    @NotNull(message = "Заполните логин")
+=======
+>>>>>>> parent of 97f15ce... сервис
     private String login;
     private String password;
     private String email;
+<<<<<<< HEAD
+
+    @NotNull(message = "Заполните имя")
+    @Size(min=1, max = 50, message = "Введите имя")
     private String first_name;
+
+    @NotNull(message = "Заполните фамилию")
+    @Size(min = 1, max = 50, message = "Введите фамилию")
+=======
+    private String first_name;
+>>>>>>> parent of 97f15ce... сервис
     private String last_name;
 
     @ManyToMany

@@ -1,6 +1,11 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
+<<<<<<< HEAD
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+=======
+>>>>>>> parent of 97f15ce... сервис
 
 
 @Entity
@@ -14,7 +19,14 @@ public class Answer {
     @JoinColumn(name = "id_question", referencedColumnName = "idQuestion")
     @ManyToOne(optional = false)
     private  Question id_question;
+<<<<<<< HEAD
+
+    @Size(max = 255)
+    @NotNull
+=======
+>>>>>>> parent of 97f15ce... сервис
     private  String description;
+    @NotNull
     private  Boolean result;
 
    
