@@ -84,15 +84,15 @@ public class UserController {
     }
 
     //авторизация
-//    @RequestMapping(value = "/authorization", method = RequestMethod.POST)
-//    public Boolean findUser(@RequestParam("login") String login, @RequestParam("password") String password) throws ParseException {
-//        Users us = userRepos.findByLoginAndPassword(login, password);
-//        if (us.getId()!= null) {
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
+    @RequestMapping(value = "/authorization", method = RequestMethod.POST)
+    public Boolean findUser(@RequestParam("login") String login, @RequestParam("password") String password) throws ParseException {
+        Users us = userRepos.findByLoginAndPassword(login, password);
+        if (us.getId()!= null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 }

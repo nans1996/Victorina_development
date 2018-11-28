@@ -48,13 +48,13 @@ public class StatisticController {
 //        List<Statistic> st = statisticRepos.findById_user(id_user);
 //        return st;
 //}
-//=======
+
 ////@RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)
 ////    public Iterable<Statistic> getByUser(@RequestParam("id_user") Integer id_user) throws ParseException {
 ////        Iterable<Statistic> st = statisticRepos.findById_user(id_user);
 ////        return st;
 ////}
-//>>>>>>> parent of 97f15ce... сервис
+
 
 
 }
