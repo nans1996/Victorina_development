@@ -1,11 +1,8 @@
 package com.example.mobile.domain;
 
 import javax.persistence.*;
-<<<<<<< HEAD
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-=======
->>>>>>> parent of 97f15ce... сервис
 import java.util.Collection;
 
 @Entity
@@ -13,13 +10,9 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-<<<<<<< HEAD
     private Integer idQuestion;
     @Size(max = 65535)
     @NotNull
-=======
-    private int idQuestion;
->>>>>>> parent of 97f15ce... сервис
     private String description;
 
 
@@ -53,11 +46,11 @@ public class Question {
         this.users = users;
     }
 
-    public int getIdQuestion() {
+    public Integer getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(int idQuestion) {
+    public void setIdQuestion(Integer idQuestion) {
         this.idQuestion = idQuestion;
     }
 
