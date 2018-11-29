@@ -7,12 +7,13 @@ public class ScrollViewAdapter : MonoBehaviour {
 
     public RectTransform prefab;
     public RectTransform content;
-
+    string str = @"[{""count_truth"": 30, ""date"":23.12.2018}, {""count_truth"": 30, ""date"":23.12.2018}]";
 
     private void Start()
     {
-        string url = "http://localhost:8080/users/ge";
+        string url = "http://localhost:8080/statistic/get";
         WWW www = new WWW(url);
+     
 
         StartCoroutine(GetItems(www, result => OnReciveModels(result)));
     }
@@ -35,7 +36,7 @@ public class ScrollViewAdapter : MonoBehaviour {
     {
         StatisticView view = new StatisticView(viewGameObject.transform);
         view.date.text = statistic.date;
-        view.count.text = statistic.count;
+        view.count.text = statistic.count_truth.ToString();
     }
 
     IEnumerator GetItems(WWW www, System.Action<Statistic[]> callback)
@@ -45,8 +46,9 @@ public class ScrollViewAdapter : MonoBehaviour {
 
         if (www.error == null)
         {
+            Statistic[] mList = JSonHelper.getJsonArray<Statistic>(www.text);
             Debug.Log("Успешно " + www.text);
-            callback(result);
+            callback(mList);
         }
         else
         {
@@ -68,11 +70,37 @@ public class ScrollViewAdapter : MonoBehaviour {
         }
     }
 
-
+    [System.Serializable]
     public class Statistic
     {
+ 
         public string date;
-        public string count;
+        public int count_truth;
+
+    }
+
+    public class JSonHelper
+    {
+        public static T[] getJsonArray<T>(string json)
+        {
+            string newJson = @"[{""array"": "+json+"}]";
+            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
+            Debug.Log("Массив "+wrapper.array);
+            return wrapper.array;
+
+        }
+
+        public static string arrayToJson<T>(T[] array)
+        {
+            Wrapper<T> wrapper = new Wrapper<T>();
+            wrapper.array = array;
+            return JsonUtility.ToJson(wrapper);
+        }
+
+        private class Wrapper<T>
+        {
+            public T[] array;
+        }
     }
 	
 }

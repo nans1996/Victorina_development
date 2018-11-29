@@ -17,6 +17,8 @@ public interface StatisticRepos extends CrudRepository<com.example.mobile.domain
     @Query("select s from Statistic s where s.id_user = :id_user")
     List<Statistic> findById_user (@Param("id_user") Integer id_user);
 
+    @Query("select s.count_truth, s.date from Statistic s")
+    Iterable<Statistic> getStatisticByCount_truthAndDate ();
 //   // Iterable<Statistic> findById_user(Integer id_user);
 
 }
