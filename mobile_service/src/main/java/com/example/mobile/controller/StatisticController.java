@@ -51,9 +51,9 @@ public class StatisticController {
 //вывести по пользователю
 
 @RequestMapping(value = "/getByIdUser", method = RequestMethod.GET)
-    public List<Statistic> getByUser(@RequestParam("id_user") Integer id_user) throws ParseException {
+    public String getByUser(@RequestParam("id_user") Users id_user) throws ParseException {
         List<Statistic> st = statisticRepos.findById_user(id_user);
-        return st;
+        return st.toString();
 }
 
 ////@RequestMapping(value = "/getByIdUser", method = RequestMethod.POST)

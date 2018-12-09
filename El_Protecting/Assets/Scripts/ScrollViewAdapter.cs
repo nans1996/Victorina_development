@@ -11,7 +11,7 @@ public class ScrollViewAdapter : MonoBehaviour {
 
     private void Start()
     {
-        string url = "http://localhost:8080/statistic/get";
+        string url = "http://localhost:8080/statistic/getByIdUser?id_user=1";
         WWW www = new WWW(url);
      
 
@@ -48,12 +48,12 @@ public class ScrollViewAdapter : MonoBehaviour {
         {
             Statistic[] mList = JSonHelper.getJsonArray<Statistic>(www.text);
             Debug.Log("Успешно " + www.text);
-            callback(mList);
+          callback(mList);
         }
         else
         {
             Debug.Log("Ошибка " + www.text);
-            callback(result);
+          callback(result);
         }
  
     }
@@ -83,9 +83,8 @@ public class ScrollViewAdapter : MonoBehaviour {
     {
         public static T[] getJsonArray<T>(string json)
         {
-            string newJson = @"[{""array"": "+json+"}]";
+            string newJson = "{\"array\":"+json+"}";
             Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
-            Debug.Log("Массив "+wrapper.array);
             return wrapper.array;
 
         }

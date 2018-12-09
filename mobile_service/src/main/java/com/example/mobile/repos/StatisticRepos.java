@@ -11,11 +11,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface StatisticRepos extends CrudRepository<com.example.mobile.domain.Statistic, Long> {
+public interface StatisticRepos extends CrudRepository<com.example.mobile.domain.Statistic, Users> {
 
 
     @Query("select s from Statistic s where s.id_user = :id_user")
-    List<Statistic> findById_user (@Param("id_user") Integer id_user);
+    List<Statistic> findById_user (@Param("id_user")  Users id_user);
 
     @Query("select s.count_truth, s.date from Statistic s")
     Iterable<Statistic> getStatisticByCount_truthAndDate ();

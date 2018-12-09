@@ -59,4 +59,10 @@ public class Statistic {
     public void setId_user(Users id_user) {
         this.id_user = id_user;
     }
+
+    @Override
+    public  String toString(){
+        return  "{\"date\": \""+date+"\", \"count_truth\": \""+count_truth+"\"}";
+    }
+
 }
