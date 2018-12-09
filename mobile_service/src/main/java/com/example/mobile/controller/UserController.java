@@ -62,25 +62,25 @@ public class UserController {
 
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public ResponseEntity<Users> editUser(@Valid @RequestBody Users us
+    public String editUser(@Valid @RequestParam("login") String login, @Valid @RequestParam("password") String password, @Valid @RequestParam("email") String email,
+                                          @Valid @RequestParam("first_name") String first_name, @Valid @RequestParam("last_name") String last_name
 
     ) {
-        HttpHeaders http = new HttpHeaders();
         try {
 
-            Optional<Users> user = userRepos.findById(us.getId());
-            user.get().setLogin(us.getLogin());
-            user.get().setPassword(us.getPassword());
-            user.get().setEmail(us.getEmail());
-            user.get().setFirst_name(us.getFirst_name());
-            user.get().setLast_name(us.getLast_name());
-            userRepos.save(user.get());
-            return new ResponseEntity<>(user.get(),http,HttpStatus.UPGRADE_REQUIRED);
+            Users user = userRepos.findByLogin(login);
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setEmail(email);
+            user.setFirst_name(first_name);
+            user.setLast_name(last_name);
+            userRepos.save(user);
+            return user.toString();
         }
         catch (Exception e){
             LOGGER.error("Ошибка обновления пользователя "+ e);
         }
-        return new ResponseEntity<>(us,http,HttpStatus.UPGRADE_REQUIRED);
+        return "error";
     }
 
     //авторизация
@@ -93,6 +93,12 @@ public class UserController {
         else {
             return false;
         }
+    }
+
+    @RequestMapping(value = "/getByLogin", method = RequestMethod.GET)
+    public String findUser(@RequestParam("login") String login) throws ParseException {
+        Users users = userRepos.findByLogin(login);
+        return users.toString();
     }
 
 }

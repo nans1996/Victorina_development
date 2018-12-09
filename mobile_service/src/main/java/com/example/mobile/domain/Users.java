@@ -115,4 +115,12 @@ public class Users {
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
+
+    @Override
+    public  String toString(){
+        return  "{\"login\": \""+login+"\", \"password\": \""+password+"\"," +
+                "\"email\": \""+email+"\", \"first_name\": \""+first_name+"\", \"last_name\": \""+last_name+"\"" +
+                "}";
+    }
+
 }
