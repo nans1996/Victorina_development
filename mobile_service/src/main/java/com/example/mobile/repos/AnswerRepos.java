@@ -9,11 +9,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 
-public interface AnswerRepos extends CrudRepository<Answer, Long> {
+public interface AnswerRepos extends CrudRepository<Answer, Question> {
 
 
  @Query("select a from Answer a where a.id_question = :id_question")
- List<Answer> findById_question(@Param("id_question") Question id);
+ List<Answer> findById_question(@Param("id_question") Question id_question);
 //      List<Answer> findById_question(Integer id);
 //
 

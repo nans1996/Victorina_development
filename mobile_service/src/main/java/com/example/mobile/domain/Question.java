@@ -62,6 +62,9 @@ public class Question {
         this.description = descriptionQ;
     }
 
-
+    @Override
+    public  String toString(){
+        return  "{\"idQuestion\": \""+idQuestion+"\", \"description\": \""+description+"\"}";
+    }
 
 }

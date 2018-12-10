@@ -18,8 +18,8 @@ public class QuestionController {
 
     //вывести все
     @RequestMapping(value = "/get")
-    public Iterable<Question> questionAll() {
-       return questionRepos.findAll();
+    public String questionAll() {
+       return questionRepos.findAll().toString();
     }
 
     //добавить???

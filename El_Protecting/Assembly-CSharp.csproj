@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\FadeInOut.cs" />
     <Compile Include="Assets\Scripts\FirebaseNotificationController.cs" />
     <Compile Include="Assets\Scripts\ProfileScript.cs" />
+    <Compile Include="Assets\Scripts\QuestionScript.cs" />
     <Compile Include="Assets\Scripts\Registration.cs" />
     <Compile Include="Assets\Scripts\ScrollViewAdapter.cs" />
     <Compile Include="Assets\Scripts\Transition.cs" />

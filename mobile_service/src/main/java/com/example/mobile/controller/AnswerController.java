@@ -43,10 +43,10 @@ public class AnswerController {
         return st;
     }
 
-    @RequestMapping(value = "/getByIdQuestion", method = RequestMethod.POST)
- public List<Answer> getByIdQuestion(@RequestParam("id_question") Question id_question){
+    @RequestMapping(value = "/getByIdQuestion", method = RequestMethod.GET)
+ public String getByIdQuestion(@RequestParam("id_question") Question id_question){
      List<Answer> a = answerRepos.findById_question(id_question);
-     return a;
+     return a.toString();
  }
 
 }

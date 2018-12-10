@@ -66,4 +66,9 @@ public class Answer {
     public void setResult(Boolean result) {
         this.result = result;
     }
+
+    @Override
+    public  String toString(){
+        return  "{\"description\": \""+description+"\", \"result\": \""+result+"\"}";
+    }
 }
