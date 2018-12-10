@@ -5,20 +5,21 @@ using UnityEngine.UI;
 
 public class QuestionScript : MonoBehaviour {
 
-    public  Text textQuestion;
+    public Text textQuestion;
     public Toggle answer1;
     public Toggle answer2;
     public Toggle answer3;
     public Toggle answer4;
     public Text textAmount;
 
-    int j = 1;
+    int k = 1;
+    Question[] questions;
 
     public void Start()
     {
-        string url = "http://localhost:8080/question/get";
-        WWW www = new WWW(url);
-        StartCoroutine(GetQuestions(www));
+       string url = "http://localhost:8080/question/get";
+       WWW www = new WWW(url);
+       StartCoroutine(GetQuestions(www));
     }
 
 
@@ -38,11 +39,12 @@ public class QuestionScript : MonoBehaviour {
 
     }
 
+    
     public void StartAnswer(int id)
     {
         string url = "http://localhost:8080/answer/getByIdQuestion?id_question="+id;
-        WWW www = new WWW(url);
-        StartCoroutine(GetAnswer(www));
+        WWW www2 = new WWW(url);
+        StartCoroutine(GetAnswer(www2));
     }
 
     IEnumerator GetAnswer(WWW www)
@@ -61,19 +63,44 @@ public class QuestionScript : MonoBehaviour {
 
     }
 
-
-    public  void GetQ(string json)
+  
+    public void GetQ(string json)
     {
-        Question[] questions = JSonHelper.getJsonArray<Question>(json);
-            int i = j - 1;
-        Debug.Log("вопрос "+ questions[0].description);
-          textQuestion.text = questions[i].description;
-            textAmount.text = j + "/35";
-            j++;
-            StartAnswer(questions[i].idQuestion);
-        
+       questions = JSonHelper.getJsonArray<Question>(json);
+        int i = 0;
+        Debug.Log("вопрос " + questions[i].description);
+        textQuestion.text = questions[i].description;
+        textAmount.text = "1/35";
+        StartAnswer(questions[i].idQuestion);
+       // NextQuestion();
     }
 
+    public void NextQuestion()
+    {
+        var instance = GameObject.Find("Toggle1") as GameObject;
+       // instance.transform.SetParent(content, false);
+        answer1 = instance.GetComponent<Toggle>();
+        answer2.isOn = false;
+        answer3.isOn = false;
+        answer4.isOn = false;
+    }
+
+    public void Click()
+    {
+         NextQuestion();
+
+        //if (answer1.isOn || answer2.isOn || answer3.isOn || answer4.isOn)
+        //{
+        //    int i = k;
+        //    Debug.Log("вопрос " + questions[i].description);
+        //    textQuestion.text = questions[i].description;
+        //    textAmount.text = (k + 1) + "/35";
+        //    k++;
+        //    StartAnswer(questions[i].idQuestion);
+            
+        //}
+        //NextQuestion();
+    }
 
     public void GetA(string json)
     {
@@ -81,11 +108,11 @@ public class QuestionScript : MonoBehaviour {
         answer1.GetComponentInChildren<Text>().text = answer[0].description;
         answer2.GetComponentInChildren<Text>().text = answer[1].description;
         answer3.GetComponentInChildren<Text>().text = answer[2].description;
-      //  answer4.GetComponentInChildren<Text>().text = answer[3].description;
+      //answer4.GetComponentInChildren<Text>().text = answer[3].description;
 
     }
 
-    [System.Serializable]
+     [System.Serializable]
     public class Question
     {
         public int idQuestion;
