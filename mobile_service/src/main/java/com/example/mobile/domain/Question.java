@@ -20,8 +20,7 @@ public class Question {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_question")
     private Collection<Answer> answerCollection;
 
-    @ManyToMany(mappedBy = "questionCollection")
-    private  Collection<Users>  users;
+
 
     public Question() {
     }
@@ -38,13 +37,6 @@ public class Question {
         this.answerCollection = answerCollection;
     }
 
-    public Collection<Users> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<Users> users) {
-        this.users = users;
-    }
 
     public Integer getIdQuestion() {
         return idQuestion;

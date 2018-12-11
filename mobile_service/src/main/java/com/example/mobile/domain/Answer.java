@@ -3,6 +3,7 @@ package com.example.mobile.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 
 @Entity
@@ -24,6 +25,10 @@ public class Answer {
     private  Boolean result;
 
 
+
+    @ManyToMany(mappedBy = "answerCollection")
+    private Collection<Users> users;
+
     public Answer() {
     }
 
@@ -33,7 +38,13 @@ public class Answer {
         this.result = result;
     }
 
+    public Collection<Users> getUsers() {
+        return users;
+    }
 
+    public void setUsers(Collection<Users> users) {
+        this.users = users;
+    }
 
     public Integer getId_answer() {
         return id_answer;

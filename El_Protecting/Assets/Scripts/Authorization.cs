@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Authorization : MonoBehaviour {
 
@@ -10,12 +11,28 @@ public class Authorization : MonoBehaviour {
     
     public InputField pass;
     public Text message;
+    public Toggle flag;
 
 
     public void Start()
     {
         log.contentType = InputField.ContentType.Alphanumeric;
         pass.contentType = InputField.ContentType.Password;
+    }
+
+ 
+
+    public void Toggle_change(bool value)
+    {
+        if (value)
+        {
+            pass.contentType = InputField.ContentType.Standard;
+
+        }
+        else
+        {
+            pass.contentType = InputField.ContentType.Password;
+        }
     }
 
     //авторизация
@@ -29,6 +46,7 @@ public class Authorization : MonoBehaviour {
         WWWForm form = new WWWForm();
         form.AddField("login", log.text);
         form.AddField("password", pass.text);
+
         WWW www = new WWW("http://localhost:8080/users/authorization", form);
         yield return www;
         if (www.error != null)
@@ -39,9 +57,34 @@ public class Authorization : MonoBehaviour {
         }
 
         Debug.Log("Пользователь авторизован " + www.text);
-        Application.LoadLevel("welcome");
+        User u = new User();
+        u.Save(www.text);
+        SceneManager.LoadScene("welcome");
+    }
 
+
+    [System.Serializable]
+    public class User
+    {
+        public string user;
+
+        public User()
+        {
+            user = "";
+
+        }
+
+        public void Save(string str)
+        {
+            user = str;
+        }
+
+        public void Destroy()
+        {
+            user = "";
+        }
+    }
 
 
     }
-}
+

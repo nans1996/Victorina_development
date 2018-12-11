@@ -37,23 +37,31 @@ public class Users  {
     private String last_name;
 
     @ManyToMany
-    @JoinTable(name = "user_question",
+    @JoinTable(name = "user_answer",
             joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_question", referencedColumnName = "idQuestion"))
-    private  Collection<Question> questionCollection;
+            inverseJoinColumns = @JoinColumn(name = "id_answer", referencedColumnName = "id_answer"))
+    private  Collection<Answer> answerCollection;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
     private Collection<Statistic> staticCollection;
+
     public Users() {
     }
 
+    public Collection<Answer> getAnswerCollection() {
+        return answerCollection;
+    }
 
-    public Collection<Question> getQuestionCollection() {
-        return questionCollection;
+    public void setAnswerCollection(Collection<Answer> answerCollection) {
+        this.answerCollection = answerCollection;
+    }
+
+    public Collection<Answer> getQuestionCollection() {
+        return answerCollection;
     }
 
     public void setQuestionCollection(Collection<Question> questionCollection) {
-        this.questionCollection = questionCollection;
+        this.answerCollection = answerCollection;
     }
 
     public Collection<Statistic> getStaticCollection() {

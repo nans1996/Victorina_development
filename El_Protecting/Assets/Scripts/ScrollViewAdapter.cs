@@ -7,7 +7,7 @@ public class ScrollViewAdapter : MonoBehaviour {
 
     public RectTransform prefab;
     public RectTransform content;
-    string str = @"[{""count_truth"": 30, ""date"":23.12.2018}, {""count_truth"": 30, ""date"":23.12.2018}]";
+  //  string str = @"[{""count_truth"": 30, ""date"":23.12.2018}, {""count_truth"": 30, ""date"":23.12.2018}]";
 
     private void Start()
     {

@@ -12,6 +12,13 @@ public class Registration : MonoBehaviour {
     public InputField firstname;
     public InputField lastname;
 
+    private void Start()
+    {
+        login.contentType = InputField.ContentType.Alphanumeric;
+        password.characterLimit = 20;
+        email.contentType = InputField.ContentType.EmailAddress;
+    }
+
     private void CliRegistration()
     {
         StartCoroutine(Registr());

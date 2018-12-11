@@ -15,6 +15,11 @@ public class ProfileScript : MonoBehaviour {
 
     private void Start()
     {
+
+        login.contentType = InputField.ContentType.Alphanumeric;
+        password.characterLimit = 20;
+        email.contentType = InputField.ContentType.EmailAddress;
+
         string url = "http://localhost:8080/users/getByLogin?login="+log;
         WWW www = new WWW(url);
         StartCoroutine(GetItems(www));
