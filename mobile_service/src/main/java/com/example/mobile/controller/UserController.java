@@ -1,39 +1,32 @@
 package com.example.mobile.controller;
 
-import com.example.mobile.domain.Question;
-import com.example.mobile.domain.Statistic;
 import com.example.mobile.domain.Users;
-import com.example.mobile.repos.QuestionRepos;
-import com.example.mobile.repos.StatisticRepos;
 import com.example.mobile.repos.UserRepos;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.validation.Valid;
-import java.util.Optional;
+import com.example.mobile.service.SecurityServiceInterface;
+import com.example.mobile.service.UserServiceInterface;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    public UserController() {
-    }
-
     @Autowired
     private UserRepos userRepos;
 
+    @Autowired
+    private SecurityServiceInterface securityService;
+
+    @Autowired
+    private UserServiceInterface userService;
 
     static final Logger LOGGER = Logger.getLogger(UserController.class);
 
@@ -51,7 +44,8 @@ public class UserController {
         try {
 
             Users user = new Users(login,password,email,first_name,last_name);
-            userRepos.save(user);
+            userService.save(user);
+            securityService.authoLogin(user.getLogin(), user.getPassword());
         }
         catch (Exception e){
             LOGGER.error("Ошибка добавления пользователя: "+ e);
@@ -60,10 +54,21 @@ public class UserController {
     }
 
 
+    //вход
+    @RequestMapping(value = "/logIn", method = RequestMethod.GET)
+    public Boolean findUser(@RequestParam("login") String login, @RequestParam("password") String password) throws ParseException {
+        Users us = userRepos.findByLoginAndPassword(login, password);
+        if (us.getId()!= null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editUser(@Valid @RequestParam("login") String login, @Valid @RequestParam("password") String password, @Valid @RequestParam("email") String email,
-                                          @Valid @RequestParam("first_name") String first_name, @Valid @RequestParam("last_name") String last_name
+                           @Valid @RequestParam("first_name") String first_name, @Valid @RequestParam("last_name") String last_name
 
     ) {
         try {
@@ -83,17 +88,6 @@ public class UserController {
         return "error";
     }
 
-    //авторизация
-    @RequestMapping(value = "/authorization", method = RequestMethod.POST)
-    public Boolean findUser(@RequestParam("login") String login, @RequestParam("password") String password) throws ParseException {
-        Users us = userRepos.findByLoginAndPassword(login, password);
-        if (us.getId()!= null) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 
     @RequestMapping(value = "/getByLogin", method = RequestMethod.GET)
     public String findUser(@RequestParam("login") String login) throws ParseException {

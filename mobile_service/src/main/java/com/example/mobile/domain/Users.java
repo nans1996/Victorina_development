@@ -1,5 +1,8 @@
 package com.example.mobile.domain;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Indexed;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -8,12 +11,13 @@ import java.util.Collection;
 
 
 @Entity
-public class Users {
+public class Users  {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
     @NotNull(message = "Заполните логин")
+    @Column(unique = true)
     private String login;
 
     @NotNull(message = "Заполните пароль")

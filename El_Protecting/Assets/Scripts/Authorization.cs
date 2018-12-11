@@ -7,9 +7,16 @@ public class Authorization : MonoBehaviour {
 
 
     public InputField log;
+    
     public InputField pass;
     public Text message;
 
+
+    public void Start()
+    {
+        log.contentType = InputField.ContentType.Alphanumeric;
+        pass.contentType = InputField.ContentType.Password;
+    }
 
     //авторизация
     public void CliAuthorization()
