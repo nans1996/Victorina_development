@@ -56,6 +56,12 @@
             <version>${spring-security.version}</version>
         </dependency>
 
+        <!--jwt-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
 
         <dependency>
             <groupId>log4j</groupId>

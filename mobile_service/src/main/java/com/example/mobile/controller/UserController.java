@@ -2,11 +2,9 @@ package com.example.mobile.controller;
 
 import com.example.mobile.domain.Users;
 import com.example.mobile.repos.UserRepos;
-import com.example.mobile.service.SecurityServiceInterface;
-import com.example.mobile.service.UserServiceInterface;
+import com.example.mobile.service.JwtTokenProvider;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,10 +21,8 @@ public class UserController {
     private UserRepos userRepos;
 
     @Autowired
-    private SecurityServiceInterface securityService;
+    private JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    private UserServiceInterface userService;
 
     static final Logger LOGGER = Logger.getLogger(UserController.class);
 
@@ -44,8 +40,8 @@ public class UserController {
         try {
 
             Users user = new Users(login,password,email,first_name,last_name);
-            userService.save(user);
-            securityService.authoLogin(user.getLogin(), user.getPassword());
+            userRepos.save(user);
+
         }
         catch (Exception e){
             LOGGER.error("Ошибка добавления пользователя: "+ e);
@@ -56,13 +52,13 @@ public class UserController {
 
     //вход
     @RequestMapping(value = "/logIn", method = RequestMethod.GET)
-    public Boolean findUser(@RequestParam("login") String login, @RequestParam("password") String password) throws ParseException {
+    public String findUser(@RequestParam("login") String login, @RequestParam("password") String password) throws ParseException {
         Users us = userRepos.findByLoginAndPassword(login, password);
         if (us.getId()!= null) {
-            return true;
+            return jwtTokenProvider.createToken(login);
         }
         else {
-            return false;
+            return "НЕТ!";
         }
     }
 
