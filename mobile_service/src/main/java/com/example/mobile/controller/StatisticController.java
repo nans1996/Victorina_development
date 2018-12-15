@@ -23,7 +23,7 @@ public class StatisticController {
 
    //добавление статистики
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addStatistic( @RequestParam int count_truth, @RequestParam Users id_user) throws ParseException {
+    public String addStatistic( @RequestParam("count_truth") int count_truth, @RequestParam("id_user") Users id_user) throws ParseException {
        Date date = new Date();
         SimpleDateFormat Format = new SimpleDateFormat("dd.MM.yyyy");
         String docDate = Format.format(date);

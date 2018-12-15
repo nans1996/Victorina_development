@@ -12,11 +12,11 @@ public class UserAnswer {
     private  Integer id;
 
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = Users.class)
     private  Users id_user;
 
     @JoinColumn(name = "id_answer", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = Answer.class)
     private  Answer id_answer;
 
 

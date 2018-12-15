@@ -44,13 +44,13 @@ public class AnswerController {
 //     return a;
 // }
 
-//    @RequestMapping(value = "/add", method = RequestMethod.POST)
-//    public UserAnswer addUserAnswer(@RequestParam("login") String login, @RequestParam("id_answer") Answer id_answer) {
-//        Users us = userRepos.findByLogin(login);
-//        UserAnswer ua = new UserAnswer(us, id_answer);
-//        userAnswerRepos.save(ua);
-//        return ua;
-//    }
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public UserAnswer addUserAnswer(@RequestParam("id_user") Users id_user, @RequestParam("id_answer") Answer id_answer) {
+       // Users us = userRepos.findByLogin(login);
+        UserAnswer ua = new UserAnswer(id_user, id_answer);
+        userAnswerRepos.save(ua);
+        return ua;
+    }
 
     @RequestMapping(value = "/getByIdQuestion", method = RequestMethod.GET)
  public String getByIdQuestion(@RequestParam("id_question") Question id_question){

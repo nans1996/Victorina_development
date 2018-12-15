@@ -12,7 +12,10 @@ public class ProfileScript : MonoBehaviour {
     public InputField last_name;
 
     string log = "nasty.rod@yandex.ru";
-    string str = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY2ODEwLCJleHAiOjE1NDQ4NzA0MTB9.jBIK9SVFc6QywcH6DYy3BQJUts7rQE5ZRPW2m29P8FU";
+  //  string str = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY2ODEwLCJleHAiOjE1NDQ4NzA0MTB9.jBIK9SVFc6QywcH6DYy3BQJUts7rQE5ZRPW2m29P8FU";
+
+    string token;
+
     private void Start()
     {
 
@@ -26,11 +29,17 @@ public class ProfileScript : MonoBehaviour {
 
         var data = form.data; // Данные в byte[]
         var headers = form.headers; // Заголовки
-        headers["Authorization"] = str;
+        string trim = token.Trim('"');
+        headers["Authorization"] = trim;
         var www = new WWW(url, data, headers);
         StartCoroutine(GetItems(www));
     }
 
+
+    private void OnEnable()
+    {
+        token = PlayerPrefs.GetString("tokenUser");
+    }
 
     IEnumerator GetItems(WWW www)
     {
@@ -72,9 +81,10 @@ public class ProfileScript : MonoBehaviour {
         form.AddField("last_name", last_name.text);
         var data = form.data; // Данные в byte[]
         var headers = form.headers; // Заголовки
-        Authorization.Repos r = new Authorization.Repos();
-        string str2 = r.R;
-        headers["Authorization"] = str2;
+        //Authorization.Repos r = new Authorization.Repos();
+        //string str2 = r.R;
+         string trim = token.Trim('"');
+        headers["Authorization"] = trim;
         var www = new WWW("http://localhost:8080/users/edit", data, headers);
         yield return www;
         if (www.error != null)

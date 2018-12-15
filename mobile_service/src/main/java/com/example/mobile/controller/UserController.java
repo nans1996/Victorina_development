@@ -51,7 +51,7 @@ public class UserController {
 
 
     //вход
-    @RequestMapping(value = "/logIn", method = RequestMethod.GET)
+    @RequestMapping(value = "/logIn", method = RequestMethod.POST)
     public String findUser(@RequestParam("login") String login, @RequestParam("password") String password) throws ParseException {
         Users us = userRepos.findByLoginAndPassword(login, password);
         if (us.getId()!= null) {

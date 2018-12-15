@@ -43,12 +43,12 @@ public class JwtTokenProvider {
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
 
-        return Jwts.builder()//
+        return "\""+Jwts.builder()//
                 .setClaims(claims)//
                 .setIssuedAt(now)//
                 .setExpiration(validity)//
                 .signWith(SignatureAlgorithm.HS256, secretKey)//
-                .compact();
+                .compact()+"\"";
     }
 
     public Authentication getAuthentication(String token) {

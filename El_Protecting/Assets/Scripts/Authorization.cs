@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class Authorization : MonoBehaviour {
 
@@ -12,6 +14,8 @@ public class Authorization : MonoBehaviour {
     public InputField pass;
     public Text message;
     public Toggle flag;
+
+    string token = "";
 
 
     //public void Start()
@@ -60,11 +64,30 @@ public class Authorization : MonoBehaviour {
         Debug.Log("Пользователь авторизован " + www.text);
         Repos r = new Repos();
         r.Save(www.text);
+        Debug.Log("ПРОверка "+ r.R);
+        token = r.R;
+        Debug.Log("Прроверка 2 "+ token);
+        //проверка, сохраняет ли
         SceneManager.LoadScene("welcome");
     }
 
+    private void OnDisable()
+    {
+        PlayerPrefs.SetString("tokenUser", token);
+        Debug.Log("Disable  "+ token);
+    }
 
+    //public static void Save(string str)
+    //    {
 
+    //        BinaryFormatter bf = new BinaryFormatter();
+    //        FileStream file = File.Create(Application.persistentDataPath + "/savedToken.gd");
+    //        bf.Serialize(file, str);
+    //        Debug.Log("Файл успех");
+    //        file.Close();
+    //    }
+
+    [System.Serializable]
     public class Repos
     {
         public string R { get; set; }
@@ -73,6 +96,7 @@ public class Authorization : MonoBehaviour {
             R = str;
         }
 
+  
     }
 
 
