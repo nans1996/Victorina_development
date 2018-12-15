@@ -2,7 +2,11 @@ package com.example.mobile.controller;
 
 import com.example.mobile.domain.Answer;
 import com.example.mobile.domain.Question;
+import com.example.mobile.domain.UserAnswer;
+import com.example.mobile.domain.Users;
 import com.example.mobile.repos.AnswerRepos;
+import com.example.mobile.repos.UserAnswerRepos;
+import com.example.mobile.repos.UserRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
@@ -25,6 +29,11 @@ public class AnswerController {
     @Autowired
     private AnswerRepos answerRepos;
 
+    @Autowired
+    private UserAnswerRepos userAnswerRepos;
+
+//    @Autowired
+//    private UserRepos userRepos;
 
 
     //вывод по вопросу
@@ -35,13 +44,13 @@ public class AnswerController {
 //     return a;
 // }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Answer addAnswer(@RequestBody Answer answer) {
-
-        Answer st = new Answer(answer.getId_question(), answer.getDescription(), answer.getResult());
-        answerRepos.save(st);
-        return st;
-    }
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public UserAnswer addUserAnswer(@RequestParam("login") String login, @RequestParam("id_answer") Answer id_answer) {
+//        Users us = userRepos.findByLogin(login);
+//        UserAnswer ua = new UserAnswer(us, id_answer);
+//        userAnswerRepos.save(ua);
+//        return ua;
+//    }
 
     @RequestMapping(value = "/getByIdQuestion", method = RequestMethod.GET)
  public String getByIdQuestion(@RequestParam("id_question") Question id_question){

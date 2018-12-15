@@ -36,11 +36,16 @@ public class Users  {
     @Size(min = 1, max = 50, message = "Введите фамилию")
     private String last_name;
 
-    @ManyToMany
-    @JoinTable(name = "user_answer",
-            joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_answer", referencedColumnName = "id_answer"))
-    private  Collection<Answer> answerCollection;
+    public Collection<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(Collection<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
+   private  Collection<UserAnswer> userAnswers;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
     private Collection<Statistic> staticCollection;
@@ -48,21 +53,6 @@ public class Users  {
     public Users() {
     }
 
-    public Collection<Answer> getAnswerCollection() {
-        return answerCollection;
-    }
-
-    public void setAnswerCollection(Collection<Answer> answerCollection) {
-        this.answerCollection = answerCollection;
-    }
-
-    public Collection<Answer> getQuestionCollection() {
-        return answerCollection;
-    }
-
-    public void setQuestionCollection(Collection<Question> questionCollection) {
-        this.answerCollection = answerCollection;
-    }
 
     public Collection<Statistic> getStaticCollection() {
         return staticCollection;

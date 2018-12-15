@@ -63,7 +63,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editUser(@Valid @RequestParam("login") String login, @Valid @RequestParam("password") String password, @Valid @RequestParam("email") String email,
+    public String editUser(
+            @Valid @RequestParam("login") String login, @Valid @RequestParam("password") String password, @Valid @RequestParam("email") String email,
                            @Valid @RequestParam("first_name") String first_name, @Valid @RequestParam("last_name") String last_name
 
     ) {
@@ -85,7 +86,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/getByLogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/getByLogin", method = RequestMethod.POST)
     public String findUser(@RequestParam("login") String login) throws ParseException {
         Users users = userRepos.findByLogin(login);
         return users.toString();

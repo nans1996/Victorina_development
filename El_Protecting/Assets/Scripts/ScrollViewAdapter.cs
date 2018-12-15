@@ -12,9 +12,10 @@ public class ScrollViewAdapter : MonoBehaviour {
     private void Start()
     {
         string url = "http://localhost:8080/statistic/getByIdUser?id_user=1";
+        WWWForm form = new WWWForm();
+        var headers = form.headers;
+        headers["Authorization"] = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY1Nzc0LCJleHAiOjE1NDQ4NjkzNzR9.EjP3luIxspmU-JtR5pD4oy3raGGn9ECYUTUCNsL5crI";
         WWW www = new WWW(url);
-     
-
         StartCoroutine(GetItems(www, result => OnReciveModels(result)));
     }
 

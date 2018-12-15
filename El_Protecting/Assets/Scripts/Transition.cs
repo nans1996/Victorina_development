@@ -33,34 +33,34 @@ public class Transition : MonoBehaviour {
 
     public void TransitionToLogIn()
     {
-        Application.LoadLevel("main");
+        SceneManager.LoadScene("main");
     }
 
     public void TransitionToProfile()
     {
-        Application.LoadLevel("profile");
+        SceneManager.LoadScene("profile");
     }
 
     public void TransitionToWelcome()
     { 
-        Application.LoadLevel("welcome");
+        SceneManager.LoadScene("welcome");
        
     }
 
     public void TransitionToQuestion()
     {
-        Application.LoadLevel("question");    
+        SceneManager.LoadScene("question");    
         
     }
 
     public void TransitionToMenu()
     {
-        Application.LoadLevel("menu");
+        SceneManager.LoadScene("menu");
     }
 
     public void TransitionToStatictic()
     {
-        Application.LoadLevel("statictic");
+        SceneManager.LoadScene("statictic");
     }
 
     public void TransitionToRegistration()

@@ -12,7 +12,7 @@ public class ProfileScript : MonoBehaviour {
     public InputField last_name;
 
     string log = "nasty.rod@yandex.ru";
-
+    string str = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY2ODEwLCJleHAiOjE1NDQ4NzA0MTB9.jBIK9SVFc6QywcH6DYy3BQJUts7rQE5ZRPW2m29P8FU";
     private void Start()
     {
 
@@ -20,8 +20,14 @@ public class ProfileScript : MonoBehaviour {
         password.characterLimit = 20;
         email.contentType = InputField.ContentType.EmailAddress;
 
-        string url = "http://localhost:8080/users/getByLogin?login="+log;
-        WWW www = new WWW(url);
+        string url = "http://localhost:8080/users/getByLogin";
+        var form = new WWWForm();
+        form.AddField("login", log);
+
+        var data = form.data; // Данные в byte[]
+        var headers = form.headers; // Заголовки
+        headers["Authorization"] = str;
+        var www = new WWW(url, data, headers);
         StartCoroutine(GetItems(www));
     }
 
@@ -58,13 +64,18 @@ public class ProfileScript : MonoBehaviour {
 
     private IEnumerator EditUser()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("login", login.text);
+        var form = new WWWForm();
+        form.AddField("login", log);
         form.AddField("password", password.text);
         form.AddField("email", email.text);
         form.AddField("first_name", first_name.text);
         form.AddField("last_name", last_name.text);
-        WWW www = new WWW("http://localhost:8080/users/edit", form);
+        var data = form.data; // Данные в byte[]
+        var headers = form.headers; // Заголовки
+        Authorization.Repos r = new Authorization.Repos();
+        string str2 = r.R;
+        headers["Authorization"] = str2;
+        var www = new WWW("http://localhost:8080/users/edit", data, headers);
         yield return www;
         if (www.error != null)
         {

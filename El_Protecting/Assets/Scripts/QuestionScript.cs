@@ -13,15 +13,24 @@ public class QuestionScript : MonoBehaviour
     public Toggle answer4;
     public Text textAmount;
 
-    int id_user = 1;
+    int id_user = 50;
     int k = 1;
     Question[] questions = null;
     Answer[] answer = null;
 
+    string str = "";
+
     public void Start()
     {
         string url = "http://localhost:8080/question/get";
-        WWW www = new WWW(url);
+        var form = new WWWForm();
+        var data = form.data; // Данные в byte[]
+        var headers = form.headers; // Заголовки
+        //Authorization.Repos r = new Authorization.Repos();
+        //string str2 = r.R;
+        headers["Authorization"] = str;
+
+        var www = new WWW(url,data, headers);
         StartCoroutine(GetQuestions(www));
     }
 
@@ -93,7 +102,7 @@ public class QuestionScript : MonoBehaviour
         answer1.GetComponentInChildren<Text>().text = answer[0].description;
         answer2.GetComponentInChildren<Text>().text = answer[1].description;
         answer3.GetComponentInChildren<Text>().text = answer[2].description;
-        //answer4.GetComponentInChildren<Text>().text = answer[3].description;
+        answer4.GetComponentInChildren<Text>().text = answer[3].description;
 
     }
 

@@ -26,8 +26,8 @@ public class Answer {
 
 
 
-    @ManyToMany(mappedBy = "answerCollection")
-    private Collection<Users> users;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_answer")
+    private Collection<UserAnswer> userAnswers;
 
     public Answer() {
     }
@@ -37,15 +37,13 @@ public class Answer {
         this.description = description;
         this.result = result;
     }
-
-    public Collection<Users> getUsers() {
-        return users;
+    public Collection<UserAnswer> getUserAnswers() {
+        return userAnswers;
     }
 
-    public void setUsers(Collection<Users> users) {
-        this.users = users;
+    public void setUserAnswers(Collection<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
-
     public Integer getId_answer() {
         return id_answer;
     }

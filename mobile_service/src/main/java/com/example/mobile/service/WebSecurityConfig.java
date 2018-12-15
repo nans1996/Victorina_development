@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 // ACCOUNT
-                .antMatchers("/users/logIn").permitAll() //todo дописать мапинг регистрации
+                .antMatchers("/users/logIn", "/users/addUser").permitAll() //todo дописать мапинг регистрации
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
