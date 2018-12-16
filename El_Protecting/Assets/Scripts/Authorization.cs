@@ -16,7 +16,7 @@ public class Authorization : MonoBehaviour {
     public Toggle flag;
 
     string token = "";
-
+    string Userlogin = "";
 
     //public void Start()
     //{
@@ -41,11 +41,12 @@ public class Authorization : MonoBehaviour {
 
     //авторизация
     public void CliAuthorization()
-        {
-            StartCoroutine(Login());
-        }
+       {
+            StartCoroutine(Login(result => Callback(result)));
 
-    public IEnumerator Login()
+    }
+
+    public IEnumerator Login(System.Action<string> cd)
     {
         WWWForm form = new WWWForm();
         form.AddField("login", log.text);
@@ -64,28 +65,70 @@ public class Authorization : MonoBehaviour {
         Debug.Log("Пользователь авторизован " + www.text);
         Repos r = new Repos();
         r.Save(www.text);
+        //проверки
         Debug.Log("ПРОверка "+ r.R);
         token = r.R;
         Debug.Log("Прроверка 2 "+ token);
-        //проверка, сохраняет ли
+        cd(token);
+
+    }
+
+
+    public void Callback(string result)
+    {
+        StartCoroutine(GetUsername(result));
+    }
+
+
+    public IEnumerator GetUsername(string token)
+    {
+        var form = new WWWForm();
+        //var data = form.data; // Данные в byte[]
+        var headers = form.headers; // Заголовки
+        string trim = token.Trim('"');
+        headers["Authorization"] = trim;
+        var www = new WWW("http://localhost:8080/users/edit2", null, headers);
+        yield return www;
+        if (www.error != null)
+        {
+            Debug.Log("Сервер ответил нет логина " + www.error);
+
+            yield break;
+        }
+
+        Debug.Log("ЕСТЬ! " + www.text);
+        User us = FromJson(www.text);
+        Userlogin = us.username;
+        Debug.Log("Типа логин "+Userlogin);
+        //переход
         SceneManager.LoadScene("welcome");
+       
+
+    }
+
+
+    public static User FromJson(string json)
+    {
+        User user = JsonUtility.FromJson<User>(json);
+        return user;
+    }
+
+    [System.Serializable]
+    public class User
+    {
+        public string username;
+
     }
 
     private void OnDisable()
     {
         PlayerPrefs.SetString("tokenUser", token);
-        Debug.Log("Disable  "+ token);
+        Debug.Log("Disable  " + token);
+        PlayerPrefs.SetString("Username", Userlogin);
+        Debug.Log("Username  " + Userlogin);
+
     }
 
-    //public static void Save(string str)
-    //    {
-
-    //        BinaryFormatter bf = new BinaryFormatter();
-    //        FileStream file = File.Create(Application.persistentDataPath + "/savedToken.gd");
-    //        bf.Serialize(file, str);
-    //        Debug.Log("Файл успех");
-    //        file.Close();
-    //    }
 
     [System.Serializable]
     public class Repos

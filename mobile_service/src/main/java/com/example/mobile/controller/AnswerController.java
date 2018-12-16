@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/answer")
@@ -32,8 +33,8 @@ public class AnswerController {
     @Autowired
     private UserAnswerRepos userAnswerRepos;
 
-//    @Autowired
-//    private UserRepos userRepos;
+    @Autowired
+    private UserRepos userRepos;
 
 
     //вывод по вопросу
@@ -45,9 +46,11 @@ public class AnswerController {
 // }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public UserAnswer addUserAnswer(@RequestParam("id_user") Users id_user, @RequestParam("id_answer") Answer id_answer) {
-       // Users us = userRepos.findByLogin(login);
-        UserAnswer ua = new UserAnswer(id_user, id_answer);
+    public UserAnswer addUserAnswer(@RequestParam("login") String login, @RequestParam("id_answer") Integer id_answer) {
+        Users us = userRepos.findByLogin(login);
+        Optional<Answer> an = answerRepos.findById(id_answer);
+        Answer a = an.get();
+        UserAnswer ua = new UserAnswer(us, a);
         userAnswerRepos.save(ua);
         return ua;
     }

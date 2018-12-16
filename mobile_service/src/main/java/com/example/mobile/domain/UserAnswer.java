@@ -9,14 +9,15 @@ public class UserAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private  Integer id;
 
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = Users.class)
+    @JoinColumn(name = "id_user")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private  Users id_user;
 
-    @JoinColumn(name = "id_answer", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = Answer.class)
+    @JoinColumn(name = "id_answer")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private  Answer id_answer;
 
 

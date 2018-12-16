@@ -5,6 +5,9 @@ import com.example.mobile.repos.UserRepos;
 import com.example.mobile.service.JwtTokenProvider;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +63,14 @@ public class UserController {
         else {
             return "НЕТ!";
         }
+    }
+
+    @RequestMapping(value = "/edit2", method = RequestMethod.GET)
+    public User find() throws ParseException {
+        User us = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            return us;
+
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)

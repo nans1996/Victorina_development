@@ -14,6 +14,7 @@ import java.util.Collection;
 public class Users  {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
 
     @NotNull(message = "Заполните логин")
@@ -36,16 +37,16 @@ public class Users  {
     @Size(min = 1, max = 50, message = "Введите фамилию")
     private String last_name;
 
-    public Collection<UserAnswer> getUserAnswers() {
-        return userAnswers;
-    }
+//    public Collection<UserAnswer> getUserAnswers() {
+//        return userAnswers;
+//    }
+//
+//    public void setUserAnswers(Collection<UserAnswer> userAnswers) {
+//        this.userAnswers = userAnswers;
+//    }
 
-    public void setUserAnswers(Collection<UserAnswer> userAnswers) {
-        this.userAnswers = userAnswers;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
-   private  Collection<UserAnswer> userAnswers;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+//    private  Collection<UserAnswer> userAnswers;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
     private Collection<Statistic> staticCollection;
@@ -120,7 +121,7 @@ public class Users  {
 
     @Override
     public  String toString(){
-        return  "{\"login\": \""+login+"\", \"password\": \""+password+"\"," +
+        return  "{\"id\": \""+id+"\",\"login\": \""+login+"\", \"password\": \""+password+"\"," +
                 "\"email\": \""+email+"\", \"first_name\": \""+first_name+"\", \"last_name\": \""+last_name+"\"" +
                 "}";
     }

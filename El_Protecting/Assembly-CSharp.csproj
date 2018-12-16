@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\QuestionScript.cs" />
     <Compile Include="Assets\Scripts\Registration.cs" />
     <Compile Include="Assets\Scripts\ScrollViewAdapter.cs" />
+    <Compile Include="Assets\Scripts\TakeUsername.cs" />
     <Compile Include="Assets\Scripts\Transition.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/nasty/Documents/GitHub/Victorina_development/El_Protecting/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
