@@ -13,8 +13,8 @@ public class Statistic {
     private String date;
     private int count_truth;
 
-    @JoinColumn(name = "id_user", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_user")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Users id_user;
 
     public Statistic() {

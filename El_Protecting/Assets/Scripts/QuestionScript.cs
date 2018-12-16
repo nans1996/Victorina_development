@@ -12,16 +12,21 @@ public class QuestionScript : MonoBehaviour
     public Toggle answer3;
     public Toggle answer4;
     public Text textAmount;
-    public Animation anim;
+    public Text timer;
+    public GameObject FinishPanel;
+    public GameObject ResultPanel;
 
+    public RectTransform prefab;
+    public RectTransform content;
 
     string login = "";
     int k = 1;
     Question[] questions = null;
     Answer[] answer = null;
     string token;
-    int[] answers_id = new int[35];
-  //  UserAnswer[] userAnswers = new UserAnswer[35];
+    int[] answers_id = new int[30];
+    int statistic = 0;
+ UserAnswer[] userAnswers = new UserAnswer[4];
 
 
     public void Start()
@@ -47,8 +52,111 @@ public class QuestionScript : MonoBehaviour
     }
 
     //переход на сцену с результатом
+    //public void ClickResult()
+    //{
+    //    string url = "http://localhost:8080/question/get";
+    //    var form = new WWWForm();
+    //    var headers = form.headers; // Заголовки
+    //    //проверяем
+    //    string trim = token.Trim('"');
+    //    headers["Authorization"] = trim;
 
-//вывод вопросов
+    //    var www = new WWW(url, null, headers);
+    //    StartCoroutine(GetQuestions(www));
+
+    //}
+
+
+    public void ClickResults()
+    {
+        textAmount.text = "";
+        timer.text = "";
+        if (!ResultPanel.GetComponent<Animator>().enabled)
+        {
+            ResultPanel.GetComponent<Animator>().enabled = true;
+            OnReciveModels();
+        }
+        else
+        {
+            ResultPanel.GetComponent<Animator>().SetTrigger("InResult");
+            OnReciveModels();
+          
+        }
+    }
+
+
+
+    public  void OnReciveModels()
+      {
+        Debug.Log("Зашло в метод");
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+        for (int i=0; i < userAnswers.Length; i++)
+        { 
+            Debug.Log(userAnswers[i].id_answer +"  "+ userAnswers[i].id_question);
+            var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
+            instance.transform.SetParent(content, false);
+            InitializeItemView(instance, userAnswers[i], i);
+        }
+    }
+
+    void InitializeItemView(GameObject viewGameObject, UserAnswer ua, int i)
+    {
+        ResultView view = new ResultView(viewGameObject.transform);
+        view.question.text = questions[i].description;
+        if (answer[i].result)
+        view.answer_res.text = "1";
+        else
+            view.answer_res.text = "0";
+
+        Debug.Log("типа статистика "+statistic);
+
+    }
+
+    //IEnumerator GetItems(WWW www, System.Action<Statistic[]> callback)
+    //{
+    //    yield return www;
+    //    var result = new Statistic[0];
+
+    //    if (www.error == null)
+    //    {
+    //        Statistic[] mList = JSonHelper.getJsonArray<Statistic>(www.text);
+    //        Debug.Log("Успешно " + www.text);
+    //        callback(mList);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Ошибка " + www.text);
+    //        callback(result);
+    //    }
+
+    //}
+
+    public class ResultView
+    {
+        public Text question;
+        public Text answer_res;
+
+        public ResultView(Transform rootView)
+        {
+            question = rootView.Find("Text").GetComponent<Text>();
+            answer_res = rootView.Find("Text (1)").GetComponent<Text>();
+        }
+
+        
+    }
+
+
+
+
+
+
+
+
+
+    //вывод вопросов
     IEnumerator GetQuestions(WWW www)
     {
         yield return www;
@@ -161,10 +269,17 @@ public class QuestionScript : MonoBehaviour
     }
 
 
-        public void ToMass(int id_answer, int i)
+        public void ToMass(Answer answer, int i, int id)
     {
-        answers_id[i] = id_answer;
-        Debug.Log("Из массива "+ answers_id[i]+ "  "+id_answer+"  "+i);
+        Debug.Log(id + "  "+ answer.id_answer);
+        UserAnswer ua = new UserAnswer(id, answer.id_answer);
+        userAnswers[i] = ua;
+
+        if (answer.result)
+        {
+            statistic++;
+        }
+        Debug.Log("Из массива " + userAnswers[i].id_answer + "  "+ userAnswers[i].id_question +"  " + answer.id_answer + "  "+i);
     }
 
 
@@ -178,41 +293,78 @@ public class QuestionScript : MonoBehaviour
             textQuestion.text = questions[i].description;
             textAmount.text = (k + 1) + "/35";
             k++;
+            ResultToService(i-1, questions[i].idQuestion);
             StartAnswer(questions[i].idQuestion);
             
-            ResultToService(i-1);
+            
 
         }
         else
         {
-            anim = GetComponent<Animation>();
-            anim.Play("AnimatePanel");
+            if ((!FinishPanel.GetComponent<Animator>().enabled) && (questions.Length < i + 1))
+            {
+                StartCoroutine(WriteStatistic());
+
+                FinishPanel.GetComponent<Animator>().enabled = true;
+            }
+            else
+            {
+                StartCoroutine(WriteStatistic());
+                FinishPanel.GetComponent<Animator>().SetTrigger("In");
+            }
         }
           NextQuestion();
     }
 
-    public void ResultToService(int i)
+    public void ResultToService(int i, int id)
     {
         if (answer1.isOn)
         {
-           ToMass(answer[0].id_answer, i);
+           ToMass(answer[0], i, id);
         }
         else
             if (answer2.isOn)
         {
-            ToMass(answer[1].id_answer, i);
+            ToMass(answer[1], i, id);
         }
         else
             if (answer3.isOn)
         {
-            ToMass(answer[2].id_answer, i);
+            ToMass(answer[2], i, id);
         }
         else
             if (answer4.isOn)
         {
-            ToMass(answer[3].id_answer, i);
+            ToMass(answer[3], i, id);
         }
     }
+
+
+    private IEnumerator WriteStatistic()
+    {
+        var form = new WWWForm();
+        form.AddField("login", login);
+        form.AddField("count_truth", statistic);
+        string url = "http://localhost:8080/statistic/add";
+        var data = form.data; // Данные в byte[]
+        var headers = form.headers; // Заголовки
+                                    //тянем токен
+                                    //Authorization.Repos r = new Authorization.Repos();
+                                    //string str2 = r.R;
+        string trim = token.Trim('"');
+        headers["Authorization"] = trim;
+        Debug.Log("ЗАПИСЬ " + data);
+        WWW www = new WWW(url, data, headers);
+        yield return www;
+        if (www.error != null)
+        {
+            Debug.Log("Сервер ответил error " + www.error);
+            yield break;
+        }
+        Debug.Log("Сервер ответил " + www.text);
+
+    }
+
 
     [System.Serializable]
     public class Question
@@ -228,6 +380,19 @@ public class QuestionScript : MonoBehaviour
         public string description;
         public int id_question;
         public bool result;
+    }
+
+    [System.Serializable]
+    public class UserAnswer
+    {
+        public int id_question;
+        public int id_answer;
+
+        public UserAnswer(int id_q, int id_a)
+        {
+            this.id_question = id_q;
+            this.id_answer = id_a;
+        }
     }
 
     public class JSonHelper

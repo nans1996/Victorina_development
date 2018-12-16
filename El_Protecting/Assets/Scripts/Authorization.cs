@@ -18,26 +18,26 @@ public class Authorization : MonoBehaviour {
     string token = "";
     string Userlogin = "";
 
-    //public void Start()
-    //{
-    //    log.contentType = InputField.ContentType.Alphanumeric;
-    //    pass.contentType = InputField.ContentType.Password;
-    //}
+    public void Start()
+    {
+        log.contentType = InputField.ContentType.Alphanumeric;
+        pass.contentType = InputField.ContentType.Password;
+    }
 
- 
 
-    //public void Toggle_change(bool value)
-    //{
-    //    if (value)
-    //    {
-    //        pass.contentType = InputField.ContentType.Standard;
 
-    //    }
-    //    else
-    //    {
-    //        pass.contentType = InputField.ContentType.Password;
-    //    }
-    //}
+    public void Toggle_change(bool value)
+    {
+        if (value)
+        {
+            pass.contentType = InputField.ContentType.Standard;
+
+        }
+        else
+        {
+            pass.contentType = InputField.ContentType.Password;
+        }
+    }
 
     //авторизация
     public void CliAuthorization()

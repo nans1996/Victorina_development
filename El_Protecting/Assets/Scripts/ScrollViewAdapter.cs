@@ -7,16 +7,26 @@ public class ScrollViewAdapter : MonoBehaviour {
 
     public RectTransform prefab;
     public RectTransform content;
+
+    string token;
+    string Username;
   //  string str = @"[{""count_truth"": 30, ""date"":23.12.2018}, {""count_truth"": 30, ""date"":23.12.2018}]";
 
     private void Start()
     {
-        string url = "http://localhost:8080/statistic/getByIdUser?id_user=1";
-        WWWForm form = new WWWForm();
-        var headers = form.headers;
-        headers["Authorization"] = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY1Nzc0LCJleHAiOjE1NDQ4NjkzNzR9.EjP3luIxspmU-JtR5pD4oy3raGGn9ECYUTUCNsL5crI";
-        WWW www = new WWW(url);
+        string url = "http://localhost:8080/statistic/getByIdUser?login="+Username;
+        var form = new WWWForm();
+        var headers = form.headers; 
+        string trim = token.Trim('"');
+        headers["Authorization"] = trim;
+        WWW www = new WWW(url, null, headers);
         StartCoroutine(GetItems(www, result => OnReciveModels(result)));
+    }
+
+    private void OnEnable()
+    {
+        token = PlayerPrefs.GetString("tokenUser");
+        Username = PlayerPrefs.GetString("Username");
     }
 
     void OnReciveModels(Statistic[] statistics)

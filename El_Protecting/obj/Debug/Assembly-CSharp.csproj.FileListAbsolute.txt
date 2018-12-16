@@ -218,7 +218,6 @@ C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Deb
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.ScreenCaptureModule.dll
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SharedInternalsModule.dll
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
-C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.dll
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SpriteMaskModule.dll
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SpriteShapeModule.dll
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.StandardEvents.dll
@@ -296,7 +295,6 @@ C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Deb
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.ProfilerModule.xml
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.ScreenCaptureModule.xml
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SharedInternalsModule.xml
-C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.xml
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SpriteMaskModule.xml
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.SpriteShapeModule.xml
 C:\Users\nasty\Documents\GitHub\Victorina_development\El_Protecting\Temp\bin\Debug\UnityEngine.StreamingModule.xml

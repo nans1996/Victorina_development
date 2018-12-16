@@ -48,20 +48,20 @@ public class Users  {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
 //    private  Collection<UserAnswer> userAnswers;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
-    private Collection<Statistic> staticCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_user")
+//    private Collection<Statistic> staticCollection;
 
     public Users() {
     }
 
 
-    public Collection<Statistic> getStaticCollection() {
-        return staticCollection;
-    }
-
-    public void setStaticCollection(Collection<Statistic> staticCollection) {
-        this.staticCollection = staticCollection;
-    }
+//    public Collection<Statistic> getStaticCollection() {
+//        return staticCollection;
+//    }
+//
+//    public void setStaticCollection(Collection<Statistic> staticCollection) {
+//        this.staticCollection = staticCollection;
+//    }
 
     public Integer getId() {
         return id;
