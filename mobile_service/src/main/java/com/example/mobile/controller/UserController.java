@@ -49,7 +49,7 @@ public class UserController {
         catch (Exception e){
             LOGGER.error("Ошибка добавления пользователя: "+ e);
         }
-        return "успешно";
+        return "нет";
     }
 
 
