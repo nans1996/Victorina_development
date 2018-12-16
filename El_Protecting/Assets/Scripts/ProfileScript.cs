@@ -11,10 +11,11 @@ public class ProfileScript : MonoBehaviour {
     public InputField first_name;
     public InputField last_name;
 
-    string log = "nasty.rod@yandex.ru";
-  //  string str = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY2ODEwLCJleHAiOjE1NDQ4NzA0MTB9.jBIK9SVFc6QywcH6DYy3BQJUts7rQE5ZRPW2m29P8FU";
+   string log = "";
+   // string str = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY2ODEwLCJleHAiOjE1NDQ4NzA0MTB9.jBIK9SVFc6QywcH6DYy3BQJUts7rQE5ZRPW2m29P8FU";
 
-    string token;
+    string token = "";
+
 
     private void Start()
     {
@@ -22,6 +23,9 @@ public class ProfileScript : MonoBehaviour {
         login.contentType = InputField.ContentType.Alphanumeric;
         password.characterLimit = 20;
         email.contentType = InputField.ContentType.EmailAddress;
+
+       
+        Debug.Log("Вывод логина " + log);
 
         string url = "http://localhost:8080/users/getByLogin";
         var form = new WWWForm();
@@ -32,6 +36,7 @@ public class ProfileScript : MonoBehaviour {
         string trim = token.Trim('"');
         headers["Authorization"] = trim;
         var www = new WWW(url, data, headers);
+
         StartCoroutine(GetItems(www));
     }
 
@@ -39,9 +44,10 @@ public class ProfileScript : MonoBehaviour {
     private void OnEnable()
     {
         token = PlayerPrefs.GetString("tokenUser");
+        log = PlayerPrefs.GetString("Username");
     }
 
-    IEnumerator GetItems(WWW www)
+  IEnumerator GetItems(WWW www)  
     {
         yield return www;
       //  var result = new User[0];

@@ -12,6 +12,7 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_answer")
     private Integer id_answer;
 
     @JoinColumn(name = "id_question", referencedColumnName = "idQuestion")
@@ -26,8 +27,8 @@ public class Answer {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_answer")
-    private Collection<UserAnswer> userAnswers;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id_answer")
+//    private Collection<UserAnswer> userAnswers;
 
     public Answer() {
     }
@@ -37,16 +38,16 @@ public class Answer {
         this.description = description;
         this.result = result;
     }
-    public Collection<UserAnswer> getUserAnswers() {
-        return userAnswers;
-    }
-
-    public void setUserAnswers(Collection<UserAnswer> userAnswers) {
-        this.userAnswers = userAnswers;
-    }
-    public Integer getId_answer() {
-        return id_answer;
-    }
+//    public Collection<UserAnswer> getUserAnswers() {
+//        return userAnswers;
+//    }
+//
+//    public void setUserAnswers(Collection<UserAnswer> userAnswers) {
+//        this.userAnswers = userAnswers;
+//    }
+//    public Integer getId_answer() {
+//        return id_answer;
+//    }
 
     public void setId_answer(Integer id_answer) {
         this.id_answer = id_answer;
@@ -78,6 +79,7 @@ public class Answer {
 
     @Override
     public  String toString(){
-        return  "{\"description\": \""+description+"\", \"result\": \""+result+"\"}";
+
+        return  "{\"id_answer\": \""+id_answer+"\", \"description\": \""+description+"\", \"result\": \""+result+"\"}";
     }
 }
