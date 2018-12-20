@@ -38,7 +38,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUser(@Valid @RequestParam("login") String login, @Valid @RequestParam("password") String password, @Valid @RequestParam("email") String email,
+    public Boolean addUser(@Valid @RequestParam("login") String login, @Valid @RequestParam("password") String password, @Valid @RequestParam("email") String email,
                           @Valid @RequestParam("first_name") String first_name, @Valid @RequestParam("last_name") String last_name){
         try {
 
@@ -49,7 +49,7 @@ public class UserController {
         catch (Exception e){
             LOGGER.error("Ошибка добавления пользователя: "+ e);
         }
-        return "нет";
+        return false;
     }
 
 

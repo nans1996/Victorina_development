@@ -15,6 +15,7 @@ public class QuestionScript : MonoBehaviour
     public Text timer;
     public GameObject FinishPanel;
     public GameObject ResultPanel;
+    public GameObject ResultPanel2;
 
     public RectTransform prefab;
     public RectTransform content;
@@ -71,14 +72,16 @@ public class QuestionScript : MonoBehaviour
     {
         textAmount.text = "";
         timer.text = "";
-        if (!ResultPanel.GetComponent<Animator>().enabled)
+        if ((!ResultPanel.GetComponent<Animator>().enabled) && (!ResultPanel2.GetComponent<Animator>().enabled))
         {
             ResultPanel.GetComponent<Animator>().enabled = true;
+            ResultPanel2.GetComponent<Animator>().enabled = true;
             OnReciveModels();
         }
         else
         {
             ResultPanel.GetComponent<Animator>().SetTrigger("InResult");
+            ResultPanel2.GetComponent<Animator>().SetTrigger("TriggerPanelTop");
             OnReciveModels();
           
         }

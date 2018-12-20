@@ -11,12 +11,12 @@ public class Registration : MonoBehaviour {
     public InputField email;
     public InputField firstname;
     public InputField lastname;
+    public Text TextMessage;
 
     //private void Start()
     //{
     //    login.contentType = InputField.ContentType.Alphanumeric;
-    //    password.characterLimit = 20;
-    //    email.contentType = InputField.ContentType.EmailAddress;
+    //    password.contentType = InputField.ContentType.Password;
     //}
 
     private void CliRegistration()
@@ -40,8 +40,15 @@ public class Registration : MonoBehaviour {
             Debug.Log("Сервер ответил error " + www.error);
             yield break;
         }
-        Debug.Log("Сервер ответил " + www.text);
-        SceneManager.LoadScene("main");
+        else {
+            if (www.text == "false")
+            {
+                Debug.Log("Сервер ответил " + www.text);
+                TextMessage.text = "*Введите корректные данные";
+            }
+            else
+            SceneManager.LoadScene("main");
+        }
     }
 
 }
