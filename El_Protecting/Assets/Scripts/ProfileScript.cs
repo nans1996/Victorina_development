@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ProfileScript : MonoBehaviour {
@@ -96,6 +97,7 @@ public class ProfileScript : MonoBehaviour {
         if (www.error != null)
         {
             Debug.Log("Сервер ответил error " + www.error);
+            SceneManager.LoadScene("error");
             yield break;
         }
         Debug.Log("Сервер ответил " + www.text);

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/statictic.unity
     guid: f6195005e409e364185ec382693f79e1
+  - enabled: 1
+    path: Assets/error.unity
+    guid: 5c3a38448e4431b4abd43bff89ecbdde
   m_configObjects: {}

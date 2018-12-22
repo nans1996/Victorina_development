@@ -92,7 +92,7 @@ public class Authorization : MonoBehaviour {
         if (www.error != null)
         {
             Debug.Log("Сервер ответил нет логина " + www.error);
-
+            SceneManager.LoadScene("error");
             yield break;
         }
 

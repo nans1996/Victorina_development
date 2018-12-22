@@ -25,9 +25,10 @@ public class QuestionScript : MonoBehaviour
     Question[] questions = null;
     Answer[] answer = null;
     string token;
-    int[] answers_id = new int[30];
+  //  int[] answers_id = new int[30];
     int statistic = 0;
- UserAnswer[] userAnswers = new UserAnswer[4];
+    int questLength = 0;
+  Answer[] userAnswers = null;
 
 
     public void Start()
@@ -76,13 +77,14 @@ public class QuestionScript : MonoBehaviour
         {
             ResultPanel.GetComponent<Animator>().enabled = true;
             ResultPanel2.GetComponent<Animator>().enabled = true;
+            Debug.Log("Здееесь заход на вывод");
             OnReciveModels();
         }
         else
         {
             ResultPanel.GetComponent<Animator>().SetTrigger("InResult");
             ResultPanel2.GetComponent<Animator>().SetTrigger("TriggerPanelTop");
-            OnReciveModels();
+            //OnReciveModels();
           
         }
     }
@@ -99,18 +101,22 @@ public class QuestionScript : MonoBehaviour
         for (int i=0; i < userAnswers.Length; i++)
         { 
             Debug.Log(userAnswers[i].id_answer +"  "+ userAnswers[i].id_question);
+            //
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
             instance.transform.SetParent(content, false);
             InitializeItemView(instance, userAnswers[i], i);
         }
     }
 
-    void InitializeItemView(GameObject viewGameObject, UserAnswer ua, int i)
+    void InitializeItemView(GameObject viewGameObject, Answer ua, int i)
     {
         ResultView view = new ResultView(viewGameObject.transform);
         view.question.text = questions[i].description;
-        if (answer[i].result)
-        view.answer_res.text = "1";
+        if (ua.result)
+        {
+            view.answer_res.text = "1";
+            statistic++;
+        }
         else
             view.answer_res.text = "0";
 
@@ -151,13 +157,7 @@ public class QuestionScript : MonoBehaviour
         
     }
 
-
-
-
-
-
-
-
+    //*******************************************************************
 
     //вывод вопросов
     IEnumerator GetQuestions(WWW www)
@@ -208,6 +208,7 @@ public class QuestionScript : MonoBehaviour
     public void GetQ(string json)
     {
         questions = JSonHelper.getJsonArray<Question>(json);
+        userAnswers = new Answer[questions.Length-1];
         int i = 0;
  
             textQuestion.text = questions[i].description;
@@ -245,9 +246,7 @@ public class QuestionScript : MonoBehaviour
         string url = "http://localhost:8080/answer/add";
         var data = form.data; // Данные в byte[]
         var headers = form.headers; // Заголовки
-                                    //тянем токен
-                                    //Authorization.Repos r = new Authorization.Repos();
-                                    //string str2 = r.R;
+                                    
         string trim = token.Trim('"');
         headers["Authorization"] = trim;
         Debug.Log("ЗАПИСЬ " + data);
@@ -262,28 +261,28 @@ public class QuestionScript : MonoBehaviour
 
     }
 
+//запись на сервер
+    //public void ClickExiteButton()
+    //{
+    //    for(int i=0; i<answers_id.Length; i++)
+    //    {
+    //        StartCoroutine(WriteAnswer(answers_id[i]));
+    //    }
+    //}
 
-    public void ClickExiteButton()
-    {
-        for(int i=0; i<answers_id.Length; i++)
-        {
-            StartCoroutine(WriteAnswer(answers_id[i]));
-        }
-    }
 
+    //    public void ToMass(Answer answer, int i, int id)
+    //{
+    //    Debug.Log(id + "  "+ answer.id_answer);
+    //    UserAnswer ua = new UserAnswer(id, answer.id_answer);
+    //    userAnswers[i] = ua;
 
-        public void ToMass(Answer answer, int i, int id)
-    {
-        Debug.Log(id + "  "+ answer.id_answer);
-        UserAnswer ua = new UserAnswer(id, answer.id_answer);
-        userAnswers[i] = ua;
-
-        if (answer.result)
-        {
-            statistic++;
-        }
-        Debug.Log("Из массива " + userAnswers[i].id_answer + "  "+ userAnswers[i].id_question +"  " + answer.id_answer + "  "+i);
-    }
+    //    if (answer.result)
+    //    {
+    //        statistic++;
+    //    }
+    //    Debug.Log("Из массива " + userAnswers[i].id_answer + "  "+ userAnswers[i].id_question +"  " + answer.id_answer + "  "+i);
+    //}
 
 
     public void Click()
@@ -296,15 +295,19 @@ public class QuestionScript : MonoBehaviour
             textQuestion.text = questions[i].description;
             textAmount.text = (k + 1) + "/35";
             k++;
-            ResultToService(i-1, questions[i].idQuestion);
             StartAnswer(questions[i].idQuestion);
-            
-            
+          
+            //идет запись ответов
+            Debug.Log("идет запись вопросов");
+            ResultToService(i - 1);
+
+
 
         }
-        else
-        {
-            if ((!FinishPanel.GetComponent<Animator>().enabled) && (questions.Length < i + 1))
+
+
+        
+            if ((!FinishPanel.GetComponent<Animator>().enabled) && (questions.Length == i ))
             {
                 StartCoroutine(WriteStatistic());
 
@@ -315,30 +318,31 @@ public class QuestionScript : MonoBehaviour
                 StartCoroutine(WriteStatistic());
                 FinishPanel.GetComponent<Animator>().SetTrigger("In");
             }
-        }
+        
           NextQuestion();
     }
 
-    public void ResultToService(int i, int id)
+    public void ResultToService(int i)
     {
+        Debug.Log("ResultToService i "+i);
         if (answer1.isOn)
         {
-           ToMass(answer[0], i, id);
+            userAnswers[i] = answer[0];
         }
         else
             if (answer2.isOn)
         {
-            ToMass(answer[1], i, id);
+            userAnswers[i] = answer[1];
         }
         else
             if (answer3.isOn)
         {
-            ToMass(answer[2], i, id);
+            userAnswers[i] = answer[2];
         }
         else
             if (answer4.isOn)
         {
-            ToMass(answer[3], i, id);
+            userAnswers[i] = answer[3];
         }
     }
 

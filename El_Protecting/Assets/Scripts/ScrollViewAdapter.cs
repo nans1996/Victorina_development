@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScrollViewAdapter : MonoBehaviour {
@@ -47,7 +48,7 @@ public class ScrollViewAdapter : MonoBehaviour {
     {
         StatisticView view = new StatisticView(viewGameObject.transform);
         view.date.text = statistic.date;
-        view.count.text = statistic.count_truth.ToString();
+        view.count.text = statistic.count_truth.ToString()+"/35";
     }
 
     IEnumerator GetItems(WWW www, System.Action<Statistic[]> callback)
@@ -64,7 +65,8 @@ public class ScrollViewAdapter : MonoBehaviour {
         else
         {
             Debug.Log("Ошибка " + www.text);
-          callback(result);
+            SceneManager.LoadScene("error");
+            callback(result);
         }
  
     }
