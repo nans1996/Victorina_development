@@ -98,10 +98,16 @@ public class QuestionScript : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        var instance1 = GameObject.Instantiate(prefab.gameObject) as GameObject;
+        instance1.transform.SetParent(content, false);
+       ResultView view = new ResultView(instance1.transform);
+        view.question.text = "Вопрос";
+        view.answer_res.text = "Результат";
+
         for (int i=0; i < userAnswers.Length; i++)
         { 
             Debug.Log(userAnswers[i].id_answer +"  "+ userAnswers[i].id_question);
-            //
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
             instance.transform.SetParent(content, false);
             InitializeItemView(instance, userAnswers[i], i);

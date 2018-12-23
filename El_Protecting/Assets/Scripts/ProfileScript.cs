@@ -11,6 +11,7 @@ public class ProfileScript : MonoBehaviour {
     public InputField email;
     public InputField first_name;
     public InputField last_name;
+    public Text namePole;
 
    string log = "";
    // string str = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYXN0eS5yb2RAeWFuZGV4LnJ1IiwiaWF0IjoxNTQ0ODY2ODEwLCJleHAiOjE1NDQ4NzA0MTB9.jBIK9SVFc6QywcH6DYy3BQJUts7rQE5ZRPW2m29P8FU";
@@ -51,7 +52,6 @@ public class ProfileScript : MonoBehaviour {
   IEnumerator GetItems(WWW www)  
     {
         yield return www;
-      //  var result = new User[0];
 
         if (www.error == null)
         {
@@ -62,6 +62,7 @@ public class ProfileScript : MonoBehaviour {
             email.text = us.email;
             first_name.text = us.first_name;
             last_name.text = us.last_name;
+            namePole.text = us.last_name + "  " + us.first_name;
         }
         else
         {

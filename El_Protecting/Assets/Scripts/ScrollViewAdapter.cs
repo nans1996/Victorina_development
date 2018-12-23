@@ -15,6 +15,8 @@ public class ScrollViewAdapter : MonoBehaviour {
 
     private void Start()
     {
+       
+
         string url = "http://localhost:8080/statistic/getByIdUser?login="+Username;
         var form = new WWWForm();
         var headers = form.headers; 
@@ -32,10 +34,19 @@ public class ScrollViewAdapter : MonoBehaviour {
 
     void OnReciveModels(Statistic[] statistics)
     {
-        foreach(Transform child in content)
+       
+
+        foreach (Transform child in content)
         {
             Destroy(child.gameObject);
         }
+
+ var instance1 = GameObject.Instantiate(prefab.gameObject) as GameObject;
+        instance1.transform.SetParent(content, false);
+        StatisticView view = new StatisticView(instance1.transform);
+        view.date.text = "Дата";
+        view.count.text = "Результат";
+
         foreach(var statistic in statistics)
         {
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
@@ -65,7 +76,7 @@ public class ScrollViewAdapter : MonoBehaviour {
         else
         {
             Debug.Log("Ошибка " + www.text);
-            SceneManager.LoadScene("error");
+          //  SceneManager.LoadScene("error");
             callback(result);
         }
  

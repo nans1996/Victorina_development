@@ -2476,6 +2476,7 @@ MonoBehaviour:
   email: {fileID: 808025083}
   first_name: {fileID: 990087289}
   last_name: {fileID: 1880338104}
+  namePole: {fileID: 1174933275}
 --- !u!4 &1899257262
 Transform:
   m_ObjectHideFlags: 0
