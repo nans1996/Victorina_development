@@ -44,6 +44,7 @@ public class UserController {
 
             Users user = new Users(login,password,email,first_name,last_name);
             userRepos.save(user);
+            return  true;
 
         }
         catch (Exception e){

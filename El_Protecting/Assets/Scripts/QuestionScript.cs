@@ -53,21 +53,7 @@ public class QuestionScript : MonoBehaviour
         login = PlayerPrefs.GetString("Username");
     }
 
-    //переход на сцену с результатом
-    //public void ClickResult()
-    //{
-    //    string url = "http://localhost:8080/question/get";
-    //    var form = new WWWForm();
-    //    var headers = form.headers; // Заголовки
-    //    //проверяем
-    //    string trim = token.Trim('"');
-    //    headers["Authorization"] = trim;
-
-    //    var www = new WWW(url, null, headers);
-    //    StartCoroutine(GetQuestions(www));
-
-    //}
-
+ 
 
     public void ClickResults()
     {
@@ -130,24 +116,6 @@ public class QuestionScript : MonoBehaviour
 
     }
 
-    //IEnumerator GetItems(WWW www, System.Action<Statistic[]> callback)
-    //{
-    //    yield return www;
-    //    var result = new Statistic[0];
-
-    //    if (www.error == null)
-    //    {
-    //        Statistic[] mList = JSonHelper.getJsonArray<Statistic>(www.text);
-    //        Debug.Log("Успешно " + www.text);
-    //        callback(mList);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Ошибка " + www.text);
-    //        callback(result);
-    //    }
-
-    //}
 
     public class ResultView
     {
@@ -244,20 +212,22 @@ public class QuestionScript : MonoBehaviour
     }
 
 
-    private IEnumerator WriteAnswer(int id_answer)
+    private IEnumerator WriteAnswer(int id)
     {
-        var form = new WWWForm();
-        form.AddField("login", login);
-        form.AddField("id_answer", id_answer);
-        string url = "http://localhost:8080/answer/add";
-        var data = form.data; // Данные в byte[]
-        var headers = form.headers; // Заголовки
-                                    
-        string trim = token.Trim('"');
-        headers["Authorization"] = trim;
-        Debug.Log("ЗАПИСЬ " + data);
-        WWW www = new WWW(url, data, headers);
-        yield return www;
+        
+            var form = new WWWForm();
+            form.AddField("login", login);
+            form.AddField("id_answer", id);
+            string url = "http://localhost:8080/answer/add";
+            var data = form.data; // Данные в byte[]
+            var headers = form.headers; // Заголовки
+
+            string trim = token.Trim('"');
+            headers["Authorization"] = trim;
+            Debug.Log("ЗАПИСЬ " + data);
+            WWW www = new WWW(url, data, headers);
+            yield return www;
+        
         if (www.error != null)
         {
             Debug.Log("Сервер ответил error " + www.error);
@@ -267,28 +237,16 @@ public class QuestionScript : MonoBehaviour
 
     }
 
-//запись на сервер
-    //public void ClickExiteButton()
-    //{
-    //    for(int i=0; i<answers_id.Length; i++)
-    //    {
-    //        StartCoroutine(WriteAnswer(answers_id[i]));
-    //    }
-    //}
+    //запись на сервер
+    public void ClickExiteButton()
+    {
+        StartCoroutine(WriteStatistic());
+        for (int i = 0; i < userAnswers.Length; i++)
+        {
+            StartCoroutine(WriteAnswer(userAnswers[i].id_answer));
+        }
+    }
 
-
-    //    public void ToMass(Answer answer, int i, int id)
-    //{
-    //    Debug.Log(id + "  "+ answer.id_answer);
-    //    UserAnswer ua = new UserAnswer(id, answer.id_answer);
-    //    userAnswers[i] = ua;
-
-    //    if (answer.result)
-    //    {
-    //        statistic++;
-    //    }
-    //    Debug.Log("Из массива " + userAnswers[i].id_answer + "  "+ userAnswers[i].id_question +"  " + answer.id_answer + "  "+i);
-    //}
 
 
     public void Click()
@@ -310,18 +268,16 @@ public class QuestionScript : MonoBehaviour
 
 
         }
-
-
-        
+                
             if ((!FinishPanel.GetComponent<Animator>().enabled) && (questions.Length == i ))
             {
-                StartCoroutine(WriteStatistic());
+              //  StartCoroutine(WriteStatistic());
 
                 FinishPanel.GetComponent<Animator>().enabled = true;
             }
             else
             {
-                StartCoroutine(WriteStatistic());
+               // StartCoroutine(WriteStatistic());
                 FinishPanel.GetComponent<Animator>().SetTrigger("In");
             }
         
@@ -366,7 +322,7 @@ public class QuestionScript : MonoBehaviour
                                     //string str2 = r.R;
         string trim = token.Trim('"');
         headers["Authorization"] = trim;
-        Debug.Log("ЗАПИСЬ " + data);
+        Debug.Log("ЗАПИСЬ  статистики" + data);
         WWW www = new WWW(url, data, headers);
         yield return www;
         if (www.error != null)
